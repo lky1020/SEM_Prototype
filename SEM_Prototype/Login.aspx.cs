@@ -10,7 +10,7 @@ namespace SEM_Prototype
     public partial class Login : System.Web.UI.Page
     {
         //DB
-        private string cs = ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString;
+        private string cs = ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {

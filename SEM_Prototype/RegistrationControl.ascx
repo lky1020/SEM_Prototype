@@ -55,6 +55,26 @@
 						ForeColor="Red" Display="Dynamic">
 					</asp:RequiredFieldValidator>
 				</div>
+
+				<div>
+					<asp:Label ID="lblAddress" runat="server" CssClass="registerLabel">Address</asp:Label>
+					<asp:TextBox ID="txtAddress" runat="server" placeholder="Enter Your Address" CssClass="txtStyle"></asp:TextBox>
+
+					<asp:RequiredFieldValidator ID="rfvAddress" runat="server" 
+						ControlToValidate="txtAddress" ErrorMessage="Please Enter Your Address!" 
+						ForeColor="Red" Display="Dynamic">
+					</asp:RequiredFieldValidator>
+				</div>
+
+				<div>
+					<asp:Label ID="lblPhoneNo" runat="server" CssClass="registerLabel">Phone No</asp:Label>
+					<asp:TextBox ID="txtPhoneNo" runat="server" placeholder="Enter Your Phone No" CssClass="txtStyle"></asp:TextBox>
+
+					<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+						ControlToValidate="txtPhoneNo" ErrorMessage="Please Enter Your Phone No!" 
+						ForeColor="Red" Display="Dynamic">
+					</asp:RequiredFieldValidator>
+				</div>
 						
 				<asp:Label ID="lblGender" runat="server" CssClass="registerLabel">Gender</asp:Label>
 				<br/>
@@ -71,8 +91,8 @@
 				<asp:Label ID="lblRole" runat="server" CssClass="registerLabel">Role</asp:Label>
 				<br/>
 					<div class="role">
-						<asp:RadioButton GroupName="role" ID="rdArtist" runat="server" CssClass="registerRadio" AutoPostBack="false"/>
-						<label id="lblArtist" class="registerRoleLabel" onClick="selectArtist()">Artist</label>
+						<asp:RadioButton GroupName="role" ID="rdManagement" runat="server" CssClass="registerRadio" AutoPostBack="false"/>
+						<label id="lblManagement" class="registerRoleLabel" onClick="selectManagement()">Management</label>
 
 						<asp:RadioButton GroupName="role" ID="rdCustomer" runat="server" CssClass="registerRadio" AutoPostBack="false"/>
 						<label id="lblCustomer" class="registerRoleLabel" onClick="selectCustomer()">Customer</label>
@@ -132,17 +152,17 @@
 	}
 
 	//Select the role
-	function selectArtist() {
-        document.getElementById("<%=rdArtist.ClientID %>").checked = true;
-        document.getElementById("lblArtist").classList.add("checked");
+	function selectManagement() {
+        document.getElementById("<%=rdManagement.ClientID %>").checked = true;
+        document.getElementById("lblManagement").classList.add("checked");
 
         document.getElementById("<%=rdCustomer.ClientID %>").checked = false;
         document.getElementById("lblCustomer").classList.remove("checked");
 	}
 
 	function selectCustomer() {
-        document.getElementById("<%=rdArtist.ClientID %>").checked = false;
-        document.getElementById("lblArtist").classList.remove("checked");
+        document.getElementById("<%=rdManagement.ClientID %>").checked = false;
+        document.getElementById("lblManagement").classList.remove("checked");
 
         document.getElementById("<%=rdCustomer.ClientID %>").checked = true;
         document.getElementById("lblCustomer").classList.add("checked");

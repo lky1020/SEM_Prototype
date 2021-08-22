@@ -109,7 +109,7 @@ namespace SEM_Prototype.ArtWorks
 
         private void connection()
         {
-            sqlconn = ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString;
+            sqlconn = ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString;
             conn = new SqlConnection(sqlconn);
 
         }
@@ -314,11 +314,11 @@ namespace SEM_Prototype.ArtWorks
                     try
                     {
                         //Get current user id
-                        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString))
+                        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString))
                         {
                             con.Open();
 
-                            //check existing art in wishlist
+                            //check existing menu in wishlist
                             string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND ArtId ='" + artID + "'";
                             using (SqlCommand cmdUser = new SqlCommand(query, con))
                             {
@@ -343,7 +343,7 @@ namespace SEM_Prototype.ArtWorks
                             }
                             else
                             {
-                                //Delete the art in wishlist
+                                //Delete the menu in wishlist
 
                                 query = "DELETE FROM [dbo].[Wishlist] WHERE WishlistId = @wishlistID";
 
@@ -423,7 +423,7 @@ namespace SEM_Prototype.ArtWorks
                         String status = "cart";
                         string sql = "INSERT into Cart (UserId, status) values('" + Session["username"] + "', '" + status + "')";
 
-                        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString);
+                        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString);
                         SqlCommand cmd = new SqlCommand();
                         conn.Open();
                         cmd.Connection = conn;
@@ -470,7 +470,7 @@ namespace SEM_Prototype.ArtWorks
 
                     conn.Open();
 
-                    //check whether exist same art (order detail)
+                    //check whether exist same menu (order detail)
                     if (orderDetailID != 0)
                     {
                         //update order details

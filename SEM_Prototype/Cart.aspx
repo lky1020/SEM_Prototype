@@ -9,6 +9,13 @@
             </div>
             <br /> 
 
+            <div style="text-align: left;">
+                <asp:Label ID="lblPhoneNo" runat="server">Phone No: </asp:Label> <br />
+                <asp:Label ID="lblAddress" runat="server">Address: </asp:Label>
+            </div>
+
+            <br />
+
             <%-- Cart GridView (Table) --%>
             <asp:Label ID ="cartEmpty" runat="server" Text="Your Cart is Empty ..." Visible="false">  </asp:Label>
 

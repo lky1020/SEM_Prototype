@@ -9,7 +9,7 @@ namespace SEM_Prototype
 {
     public partial class WishList : System.Web.UI.Page
     {
-        string cs = ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -122,7 +122,7 @@ namespace SEM_Prototype
                     cmd.ExecuteNonQuery();
                     refreshdata();
 
-                    Response.Write("<script>alert('Congratulation, this art had remove from your wishlist successfully')</script>");
+                    Response.Write("<script>alert('Congratulation, this menu had remove from your wishlist successfully')</script>");
 
                 }
             }
@@ -305,7 +305,7 @@ namespace SEM_Prototype
 
             conn.Open();
 
-            //check whether exist same art (order detail)
+            //check whether exist same menu (order detail)
             if (orderDetailID != 0)
             {
                 //update order details

@@ -13,7 +13,7 @@ namespace SEM_Prototype
     public partial class ForgotPasswordControl : System.Web.UI.UserControl
     {
         //DB
-        string cs = ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString;
 
         private string resetPin;
         private string username;

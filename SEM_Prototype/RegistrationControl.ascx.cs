@@ -11,7 +11,7 @@ namespace SEM_Prototype
     public partial class RegistrationControl : System.Web.UI.UserControl
     {
         //DB
-        string cs = ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -32,9 +32,9 @@ namespace SEM_Prototype
                 }
 
                 //Initialize the Role
-                if (rdArtist.Checked)
+                if (rdManagement.Checked)
                 {
-                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "initializeRole", "selectArtist();", true);
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "initializeRole", "selectManagement();", true);
                 }
                 else if (rdCustomer.Checked)
                 {
@@ -85,9 +85,9 @@ namespace SEM_Prototype
 
             string role;
 
-            if (rdArtist.Checked)
+            if (rdManagement.Checked)
             {
-                role = "Artist";
+                role = "Management";
             }
             else
             {
@@ -111,6 +111,8 @@ namespace SEM_Prototype
                     cmd.Parameters.AddWithValue("profilePic", "../img/userPic/user_default.png");   //initialize the profile pic
                     cmd.Parameters.AddWithValue("resetPin", resetPin);
                     cmd.Parameters.AddWithValue("role", role);
+                    cmd.Parameters.AddWithValue("address", txtAddress.Text);
+                    cmd.Parameters.AddWithValue("phoneno", txtPhoneNo.Text);
 
                     con.Open();
                     int k = cmd.ExecuteNonQuery();

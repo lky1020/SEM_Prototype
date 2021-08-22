@@ -9,13 +9,41 @@ namespace SEM_Prototype
 {
     public partial class Cart : System.Web.UI.Page
     {
-        string cs = ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString;
         double totalSelectPrice = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                RetrievePhoneNoAndAddress();
                 refreshdata();
+            }
+        }
+
+        private void RetrievePhoneNoAndAddress()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    SqlDataAdapter da;
+
+                    da = new SqlDataAdapter("SELECT PhoneNo, Address FROM [dbo].[User] WHERE Name = '" + Session["username"].ToString() + "' ", con);
+
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count >= 1)
+                    {
+                        lblPhoneNo.Text = "<b>Phone No: </b>" + dt.Rows[0]["PhoneNo"].ToString();
+                        lblAddress.Text = "<b>Address: </b>" + dt.Rows[0]["Address"].ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "ProfilepageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
             }
         }
 
@@ -76,7 +104,7 @@ namespace SEM_Prototype
             }
         }
 
-        //detect art product availability
+        //detect menu product availability
         private void checkArtAvailability()
         {
             SqlConnection con = new SqlConnection(cs);
@@ -129,7 +157,7 @@ namespace SEM_Prototype
         }
 
 
-        //edit art qty fn (based on row)
+        //edit menu qty fn (based on row)
         protected void gvCart_RowEditing(object sender, GridViewEditEventArgs e)
         {
 
@@ -175,7 +203,7 @@ namespace SEM_Prototype
                 //if input qty more than available qty
                 else if (select_qty > qty)
                 {
-                    Response.Write("<script>alert('There is only " + qty.ToString() + " quantity for this art is available. Therefore, quantity should not more than " + qty.ToString() + ".')</script>");
+                    Response.Write("<script>alert('There is only " + qty.ToString() + " quantity for this menu is available. Therefore, quantity should not more than " + qty.ToString() + ".')</script>");
                 }
                 else
                 {

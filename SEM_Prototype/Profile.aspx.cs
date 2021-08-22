@@ -10,7 +10,7 @@ namespace SEM_Prototype
     public partial class Profile : System.Web.UI.Page
     {
         //DB
-        string cs = ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,7 +38,9 @@ namespace SEM_Prototype
             //Update the Profile Pic for change pic
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "UpdateBrowsePic", "document.getElementById('previewPic').src ='" + Session["userPicPath"].ToString() + "';", true);
 
-            //Display manage art btn when role == artist
+            RetrievePhoneNoAndAddress();
+
+            //Display manage menu btn when role == Management
             if (Session["userRole"].ToString().Equals("Management")){
 
                 ScriptManager.RegisterStartupScript(Page, this.GetType(), "DisplayManageArtBtn", "displayManageArt();", true);
@@ -48,8 +50,10 @@ namespace SEM_Prototype
                 ScriptManager.RegisterStartupScript(Page, this.GetType(), "UndisplayManageArtBtn", "undisplayManageArt();", true);
             }
 
-            //Update the Profile Pic for edit username and password
-             ScriptManager.RegisterStartupScript(Page, this.GetType(), "UpdateUserEditPic", "document.getElementById('userPicPreview').src ='" + Session["userPicPath"].ToString() + "';", true);
+            //Update the Profile Pic for phone no, address password
+            ScriptManager.RegisterStartupScript(Page, this.GetType(), "UpdateUserEditPhoneNoPic", "document.getElementById('userPhoneNoPicPreview').src ='" + Session["userPicPath"].ToString() + "';", true);
+            ScriptManager.RegisterStartupScript(Page, this.GetType(), "UpdateUserEditAddressPic", "document.getElementById('userAddressPicPreview').src ='" + Session["userPicPath"].ToString() + "';", true);
+            ScriptManager.RegisterStartupScript(Page, this.GetType(), "UpdateUserEditPasswordPic", "document.getElementById('userPasswordPicPreview').src ='" + Session["userPicPath"].ToString() + "';", true);
 
             //Set user bio
             if (RetrieveUserBio() == false)
@@ -174,6 +178,38 @@ namespace SEM_Prototype
             }
         }
 
+        private Boolean RetrievePhoneNoAndAddress()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    SqlDataAdapter da;
+
+                    da = new SqlDataAdapter("SELECT PhoneNo, Address FROM [dbo].[User] WHERE Name = '" + lblProfileName.Text + "' ", con);
+
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count >= 1)
+                    {
+                        lblPhoneNo.Text = "<b>Phone No: </b>" + dt.Rows[0]["PhoneNo"].ToString();
+                        lblAddress.Text = "<b>Address: </b>" + dt.Rows[0]["Address"].ToString();
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "ProfilepageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
+            }
+
+            return false;
+        }
+
         private Boolean RetrieveUserBio()
         {
             if (txtAreaEditBio.Value.Equals(""))
@@ -219,6 +255,58 @@ namespace SEM_Prototype
 
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "UnDisplay Cancel Btn",
                     "undisplayCancelEditButton();", true);
+        }
+
+        protected void btnUpdatePhoneNo_Click(object sender, EventArgs e)
+        {
+            //Check whether new phone no entered
+            if (!txtBoxNewPhoneNo.Text.Equals(""))
+            {
+                //Check Whether the current and new phone no is the same
+                if (CheckUserCurrentPhoneNo() == true)
+                {
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "Duplicate Phone No",
+                        "alert('Duplicate Phone No!');", true);
+                }
+                else
+                {
+                    UpdateUserPhoneNo();
+
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "Update Phone No",
+                        "alert('Phone No. Update Successfully!'); window.location = 'Profile.aspx';", true);
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "No New Phone No",
+                    "alert('Please Enter New Phone No!');", true);
+            }
+        }
+
+        protected void btnUpdateAddress_Click(object sender, EventArgs e)
+        {
+            //Check whether new phone no entered
+            if (!txtBoxNewAddress.Text.Equals(""))
+            {
+                //Check Whether the current and new phone no is the same
+                if (CheckUserCurrentAddress() == true)
+                {
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "Duplicate Address",
+                        "alert('Duplicate Address!');", true);
+                }
+                else
+                {
+                    UpdateUserAddress();
+
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "Update Phone No",
+                        "alert('Address Update Successfully!'); window.location = 'Profile.aspx';", true);
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "No New Address",
+                    "alert('Please Enter New Address!');", true);
+            }
         }
 
         protected void btnUpdatePassword_Click(object sender, EventArgs e)
@@ -276,7 +364,7 @@ namespace SEM_Prototype
  
         }
 
-        protected void btnManageArt_Click(object sender, EventArgs e)
+        protected void btnManageMenu_Click(object sender, EventArgs e)
         {
             //Undisplay the txtAreaEditBio
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "UpdateBioUI",
@@ -286,8 +374,66 @@ namespace SEM_Prototype
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "UnDisplay Cancel Btn",
                     "undisplayCancelEditButton();", true);
 
-            ScriptManager.RegisterStartupScript(Page, this.GetType(), "Direct to manage art",
+            ScriptManager.RegisterStartupScript(Page, this.GetType(), "Direct to manage menu",
                     "window.location = 'Art.aspx';", true);
+        }
+
+        private Boolean CheckUserCurrentPhoneNo()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT PhoneNo FROM [dbo].[User] WHERE Name = '" + lblProfileName.Text + "' AND " +
+                    " PhoneNo =  '" + txtBoxNewPhoneNo.Text + "' ", con);
+
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count >= 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "ProfilepageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
+            }
+
+            return false;
+        }
+
+        private Boolean CheckUserCurrentAddress()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT Address FROM [dbo].[User] WHERE Name = '" + lblProfileName.Text + "' AND " +
+                    " Address =  '" + txtBoxNewAddress.Text + "' ", con);
+
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count >= 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "ProfilepageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
+            }
+
+            return false;
         }
 
         private Boolean CheckUserCurrentPassword()
@@ -317,6 +463,54 @@ namespace SEM_Prototype
             }
 
             return false;
+        }
+
+        private void UpdateUserPhoneNo()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_UpdatePhoneNo", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("name", lblProfileName.Text);
+                    cmd.Parameters.AddWithValue("phoneNo", txtBoxNewPhoneNo.Text);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            catch (Exception)
+            {
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "ProfilepageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
+            }
+        }
+
+        private void UpdateUserAddress()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_UpdateAddress", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("name", lblProfileName.Text);
+                    cmd.Parameters.AddWithValue("address", txtBoxNewAddress.Text);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            catch (Exception)
+            {
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "ProfilepageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
+            }
         }
 
         private void UpdateUserPassword()

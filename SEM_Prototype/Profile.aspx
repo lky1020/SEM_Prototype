@@ -22,6 +22,14 @@
                                 <asp:Label ID="lblProfileName" runat="server" Text="testing"></asp:Label>
                             </div>
 
+                            <div id="phoneNo">
+                                <asp:Label ID="lblPhoneNo" runat="server" Text="testing"></asp:Label>
+                            </div>
+
+                            <div id="address">
+                                <asp:Label ID="lblAddress" runat="server" Text="testing"></asp:Label>
+                            </div>
+
                             <div id="userBio" class="userBio">
                                 <textarea id="txtAreaUserBio" readonly="readonly" runat="server"></textarea>
                             </div>
@@ -38,8 +46,10 @@
                                     <asp:Button ID="btnCancelEditBio" CssClass="editBioBtnStyle" runat="server" Text="Cancel" OnClick="btnCancelEditBio_Click"/>
                                 </div>
                                 
-                                <asp:Button ID="btnEdit" CssClass="profileBtn profileBarBtnStyle" runat="server" Text="Edit Password" OnClientClick="showEditBox()" OnClick="btnEdit_Click"></asp:Button>
-                                <asp:Button ID="btnManageArt" CssClass="profileBtn profileBarBtnStyle" runat="server" Text="Manage Art" OnClick="btnManageArt_Click"></asp:Button>
+                                <asp:Button ID="btnEditPhone" CssClass="profileBtn profileBarBtnStyle" runat="server" Text="Edit Phone No" OnClientClick="showPhoneNoEditBox()" OnClick="btnEdit_Click"></asp:Button>
+                                <asp:Button ID="btnEditAddress" CssClass="profileBtn profileBarBtnStyle" runat="server" Text="Edit Address" OnClientClick="showAddressEditBox()" OnClick="btnEdit_Click"></asp:Button>
+                                <asp:Button ID="btnEdit" CssClass="profileBtn profileBarBtnStyle" runat="server" Text="Edit Password" OnClientClick="showPasswordEditBox()" OnClick="btnEdit_Click"></asp:Button>
+                                <asp:Button ID="btnManageMenu" CssClass="profileBtn profileBarBtnStyle" runat="server" Text="Manage Menu" OnClick="btnManageMenu_Click"></asp:Button>
                             </div>
                         </div>
                     </div>
@@ -77,15 +87,67 @@
             <asp:FileUpload ID="fileUpProfilePic" runat="server" onChange="profilePicPreview(this)" style="display:none;"/>
         </div>
 
-        <div class="editPasswordBox">
+        <div class="editPhoneNoBox">
             <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">  
 			    <ContentTemplate> 
-                    <p style="text-align: center; font-weight: 700; font-size: 24px; color: #ff0157;">Edit Username & Password:</p>
+                    <p style="text-align: center; font-weight: 700; font-size: 24px; color: #ff0157;">Edit Phone No:</p>
+                    <div class="cancelToggle" id="cancelPhoneNoEditBox" onclick="toggleCancel()"></div>
+
+                    <div class="editPhoneNoBoxContent">
+                        <div class="userImgBox" id="userImgBox">
+                            <img id="userPhoneNoPicPreview" src="img/userPic/user_default.png" alt="Profile Pic" />
+                        </div>
+
+                        <div class="newPhoneNo">
+                            <asp:Label ID="lblNewPhoneNo" runat="server" Text="New Phone No&nbsp;:&nbsp" Width="150px"></asp:Label>
+                            <asp:TextBox ID="txtBoxNewPhoneNo" runat="server" Width="200px"></asp:TextBox>
+                        </div>
+                        
+                        <div class="editUpdateBtnStyle">
+                            <asp:Button ID="btnUpdatePhoneNo" runat="server" CssClass="btnUploadPic" Text="Update" OnClick="btnUpdatePhoneNo_Click" OnClientClick="changeUpdateText()"/><br />
+                        </div>
+                    </div>
+                </ContentTemplate>  
+		    </asp:UpdatePanel> 
+
+            <asp:FileUpload ID="FileUpload1" runat="server" onChange="profilePicPreview(this)" style="display:none;"/>
+        </div>
+
+        <div class="editAddressBox">
+            <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">  
+			    <ContentTemplate> 
+                    <p style="text-align: center; font-weight: 700; font-size: 24px; color: #ff0157;">Edit Address:</p>
+                    <div class="cancelToggle" id="cancelAddressEditBox" onclick="toggleCancel()"></div>
+
+                    <div class="editAddressBoxContent">
+                        <div class="userImgBox">
+                            <img id="userAddressPicPreview" src="img/userPic/user_default.png" alt="Profile Pic" />
+                        </div>
+
+                        <div class="newAddress">
+                            <asp:Label ID="lblNewAddress" runat="server" Text="New Address&nbsp;:&nbsp" Width="150px"></asp:Label>
+                            <asp:TextBox ID="txtBoxNewAddress" runat="server" Width="200px"></asp:TextBox>
+                        </div>
+                        
+                        <div class="editUpdateBtnStyle">
+                            <asp:Button ID="btnUpdateAddress" runat="server" CssClass="btnUploadPic" Text="Update" OnClick="btnUpdateAddress_Click" OnClientClick="changeUpdateText()"/><br />
+                        </div>
+                    </div>
+                </ContentTemplate>  
+		    </asp:UpdatePanel> 
+
+            <asp:FileUpload ID="FileUpload2" runat="server" onChange="profilePicPreview(this)" style="display:none;"/>
+        </div>
+
+        <div class="editPasswordBox">
+            <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">  
+			    <ContentTemplate> 
+                    <p style="text-align: center; font-weight: 700; font-size: 24px; color: #ff0157;">Edit Password:</p>
                     <div class="cancelToggle" id="cancelEditBox" onclick="toggleCancel()"></div>
 
                     <div class="editPasswordBoxContent">
-                        <div class="userImgBox" id="userImgBox">
-                            <img id="userPicPreview" src="img/userPic/user_default.png" alt="Profile Pic" />
+                        <div class="userImgBox">
+                            <img id="userPasswordPicPreview" src="img/userPic/user_default.png" alt="Profile Pic" />
                         </div>
 
                         <div class="currentPassword">
@@ -106,7 +168,7 @@
                 </ContentTemplate>  
 		    </asp:UpdatePanel> 
 
-            <asp:FileUpload ID="FileUpload1" runat="server" onChange="profilePicPreview(this)" style="display:none;"/>
+            <asp:FileUpload ID="FileUpload3" runat="server" onChange="profilePicPreview(this)" style="display:none;"/>
         </div>
 
         <img src="img/Profile/white_texture.jpg" style="left: 0; top: 0" />
@@ -174,22 +236,40 @@
             document.getElementById('<%= btnUpdatePassword.ClientID %>').style.cursor = "default";
         }
 
-        //display manage art btn when role == artist
+        //display manage menu btn when role == management
         function displayManageArt() {
-            document.getElementById('<%= btnManageArt.ClientID %>').style.display = "inline-block";
+            document.getElementById('<%= btnManageMenu.ClientID %>').style.display = "inline-block";
         }
 
-        //undisplay manage art btn when role != artist
+        //undisplay manage menu btn when role != management
         function undisplayManageArt() {
-            document.getElementById('<%= btnManageArt.ClientID %>').style.display = "none";
+            document.getElementById('<%= btnManageMenu.ClientID %>').style.display = "none";
         }
 
         function toggleCancel() {
             $(".fileUploadBox").hide();
+            $(".editPhoneNoBox").hide();
+            $(".editAddressBox").hide();
             $(".editPasswordBox").hide();
         }
 
-        function showEditBox() {
+        function showPhoneNoEditBox() {
+            $(".editPhoneNoBox").animate({
+                height: "toggle"
+            }, 750, function () {
+                $(".editPhoneNoBox").show();
+            });
+        }
+
+        function showAddressEditBox() {
+            $(".editAddressBox").animate({
+                height: "toggle"
+            }, 750, function () {
+                $(".editAddressBox").show();
+            });
+        }
+
+        function showPasswordEditBox() {
             $(".editPasswordBox").animate({
                 height: "toggle"
             }, 750, function () {
@@ -211,6 +291,14 @@
 
                 $(".fileUploadBox").hide();
                 
+            }
+
+            if ($(e.target).closest(".editPhoneNoBox").length === 0) {
+                $(".editPhoneNoBox").hide();
+            }
+
+            if ($(e.target).closest(".editAddressBox").length === 0) {
+                $(".editAddressBox").hide();
             }
 
             if ($(e.target).closest(".editPasswordBox").length === 0) {

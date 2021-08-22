@@ -12,7 +12,7 @@ namespace SEM_Prototype
     public partial class LoginControl : System.Web.UI.UserControl
     {
         //DB
-        string cs = ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["PennyJuiceDb"].ConnectionString;
 
         private string loginName;
         private string profilePicPath;
@@ -221,13 +221,13 @@ namespace SEM_Prototype
             }
         }
 
-        private void ActiveArtistNavigation()
+        private void ActiveManagementNavigation()
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_ActiveArtist", con);
+                    SqlCommand cmd = new SqlCommand("sp_ActiveManagement", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     con.Open();
@@ -306,11 +306,11 @@ namespace SEM_Prototype
                     //Activate the profile navigation + user account
                     ActivateProfileNavigation();
 
-                    //Check whether the user is Artist or not
-                    //If, yes active the navigation to manage artworks
-                    if (userRole.Equals("Artist"))
+                    //Check whether the user is Management or not
+                    //If, yes active the navigation to manage menu
+                    if (userRole.Equals("Management"))
                     {
-                        ActiveArtistNavigation();
+                        ActiveManagementNavigation();
                     }
                     else
                     {
