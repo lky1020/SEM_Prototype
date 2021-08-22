@@ -67,7 +67,7 @@
         </div>
 
         <div class="content">
-            <asp:DataList ID="ArtWorkDataList" runat="server" DataKeyField="ArtId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="60" HorizontalAlign="Center" CellPadding="3">
+            <asp:DataList ID="MenuDataList" runat="server" DataKeyField="ArtId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="60" HorizontalAlign="Center" CellPadding="3">
                 <ItemTemplate>
                     <table id="artwork-table">
                         <tr>

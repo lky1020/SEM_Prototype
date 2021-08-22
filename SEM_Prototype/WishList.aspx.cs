@@ -212,7 +212,7 @@ namespace SEM_Prototype
             ImageButton imgButton = sender as ImageButton;
             Int32 artID = Convert.ToInt32(imgButton.CommandArgument.ToString());
 
-            Response.Redirect("ArtWorkDetails.aspx?ArtId="+ artID);
+            Response.Redirect("MenuDetails.aspx?ArtId="+ artID);
  
         }
 

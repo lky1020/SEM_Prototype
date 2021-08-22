@@ -38,9 +38,9 @@ namespace SEM_Prototype.ArtWorks
 
         private void checkAvailability()
         {
-            foreach (DataListItem item in ArtWorkDataList.Items)
+            foreach (DataListItem item in MenuDataList.Items)
             {
-                var currentKey = ArtWorkDataList.DataKeys[item.ItemIndex];
+                var currentKey = MenuDataList.DataKeys[item.ItemIndex];
 
                 Int32 artId = Convert.ToInt32(currentKey);
                 int stock = 0;
@@ -74,9 +74,9 @@ namespace SEM_Prototype.ArtWorks
         {
             Int32 wishlistID;
 
-            foreach (DataListItem item in ArtWorkDataList.Items)
+            foreach (DataListItem item in MenuDataList.Items)
             {
-                var currentKey = ArtWorkDataList.DataKeys[item.ItemIndex];
+                var currentKey = MenuDataList.DataKeys[item.ItemIndex];
 
                 Int32 artId = Convert.ToInt32(currentKey);
 
@@ -221,8 +221,8 @@ namespace SEM_Prototype.ArtWorks
             btnLast.Enabled = !PD.IsLastPage;
             ViewState["TotalCount"] = PD.PageCount;
 
-            ArtWorkDataList.DataSource = PD;
-            ArtWorkDataList.DataBind();
+            MenuDataList.DataSource = PD;
+            MenuDataList.DataBind();
             ViewState["PagedDataSurce"] = dt;
         }
 

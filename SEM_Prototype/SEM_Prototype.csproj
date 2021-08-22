@@ -77,6 +77,8 @@
     <Content Include="App_Data\PennyJuiceDB_log.ldf">
       <DependentUpon>PennyJuiceDB.mdf</DependentUpon>
     </Content>
+    <Content Include="css\menudetails.css" />
+    <Content Include="MenuDetails.aspx" />
     <Content Include="Menu.aspx" />
     <Content Include="Cart.aspx" />
     <Content Include="css\menu.css" />
@@ -199,6 +201,13 @@
     <Content Include="WishList.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MenuDetails.aspx.cs">
+      <DependentUpon>MenuDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuDetails.aspx.designer.cs">
+      <DependentUpon>MenuDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Menu.aspx.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

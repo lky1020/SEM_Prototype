@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/WAD.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="SEM_Prototype.ArtWorks.ArtWorks" %>
 
-<asp:Content ID="ArtWorks" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Menu" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header Banner -->
     <div class="container">
         <img src="img/artwork/header_bg.jpg" alt="" class="menu-gallery-header-bg" />
@@ -20,24 +20,6 @@
         <p class="text-f2">Category</p>
         <asp:RadioButtonList ID="rblCategory" runat="server" CssClass="cbl white-text" CellSpacing="10" DataSourceID="CategoryDataSource" DataTextField="CategoryName" DataValueField="CategoryName" OnSelectedIndexChanged="rblCategory_SelectedIndexChanged"></asp:RadioButtonList>
         <hr class="filter-line" />
-
-        <!-- Price Range-->
-        <!--   <p class="text-f2">Price Range</p>
-            <table class="price-table">
-                <tr class="margin-b10">
-                    <td class="left">Min Price : RM</td>
-                    <td>
-                        <asp:TextBox ID="txtMinPrice" runat="server" CssClass="txtPrice"></asp:TextBox></td>
-                </tr>
-
-                <tr>
-                    <td class="left">Max Price: RM</td>
-                    <td>
-                        <asp:TextBox ID="txtMaxPrice" runat="server" CssClass="txtPrice"></asp:TextBox></td>
-                </tr>
-            </table> 
-
-            <hr class="filter-line" /> -->
 
         <!-- Search button & Reset button -->
         <div class="flex-parent jc-between">
@@ -67,19 +49,19 @@
 
         <div class="dlImg">
             <!-- Data list -->
-            <asp:DataList ID="ArtWorkDataList" runat="server" DataKeyField="ArtId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="35" HorizontalAlign="Center" CellPadding="3" OnItemCommand="ArtWorkDataList_ItemCommand">
+            <asp:DataList ID="MenuDataList" runat="server" DataKeyField="ArtId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="35" HorizontalAlign="Center" CellPadding="3" OnItemCommand="ArtWorkDataList_ItemCommand">
                 <ItemTemplate>
                     <table id="artwork-table" style="padding-bottom: 15px;">
                         <tr>
                             <td>
-                                <a href="ArtWorkDetails.aspx?ArtId=<%#:Eval("ArtId")%>">
+                                <a href="MenuDetails.aspx?ArtId=<%#:Eval("ArtId")%>">
                                     <asp:Image ID="ArtImage" runat="server" CssClass="menu-gallery-image" ImageUrl='<%# Eval("ArtImage") %>' />
                                 </a>
                             </td>
                         </tr>
                         <tr class="text-a1 padding-b15">
                             <td>
-                                <a href="ArtWorkDetails.aspx?ArtId=<%#:Eval("ArtId")%>" class="menu-title">
+                                <a href="MenuDetails.aspx?ArtId=<%#:Eval("ArtId")%>" class="menu-title">
                                     <asp:Label ID="ArtNameLabel" runat="server" Text='<%# Eval("ArtName") %>' />
                                 </a>
                             </td>
@@ -129,7 +111,7 @@
     <asp:SqlDataSource ID="CategoryDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Category]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="ArtDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Artist INNER JOIN Category ON Category.CategoryID = @Category">
         <SelectParameters>
-            <asp:ControlParameter ControlID="ArtWorkDataList" Name="Category" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="MenuDataList" Name="Category" PropertyName="SelectedValue" />
         </SelectParameters>
     </asp:SqlDataSource>
 

@@ -115,8 +115,8 @@ namespace SEM_Prototype
             PagedDataSource PD = new PagedDataSource();
 
             PD.DataSource = dt.DefaultView;
-            ArtWorkDataList.DataSource = PD;
-            ArtWorkDataList.DataBind();
+            MenuDataList.DataSource = PD;
+            MenuDataList.DataBind();
 
         }
 
