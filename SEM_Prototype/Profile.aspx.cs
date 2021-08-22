@@ -39,7 +39,7 @@ namespace SEM_Prototype
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "UpdateBrowsePic", "document.getElementById('previewPic').src ='" + Session["userPicPath"].ToString() + "';", true);
 
             //Display manage art btn when role == artist
-            if (Session["userRole"].ToString().Equals("Artist")){
+            if (Session["userRole"].ToString().Equals("Management")){
 
                 ScriptManager.RegisterStartupScript(Page, this.GetType(), "DisplayManageArtBtn", "displayManageArt();", true);
             }

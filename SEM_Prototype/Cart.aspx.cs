@@ -40,7 +40,7 @@ namespace SEM_Prototype
                 con.Open();
                 String queryGetData = "Select a.ArtId, a.ArtName, a.ArtImage, a.Price, a.ArtDescription,o.orderDetailId, o.qtySelected, o.Subtotal from [Cart] c " +
                     "INNER JOIN [OrderDetails] o on c.CartId = o.CartId " +
-                    "INNER JOIN [Artist] a on o.ArtId = a.ArtId  " + 
+                    "INNER JOIN [Menu] a on o.ArtId = a.ArtId  " + 
                     "Where c.UserId = @userid AND c.status = 'cart'";
                 SqlCommand cmd = new SqlCommand(queryGetData, con);
                 cmd.Parameters.AddWithValue("@userid", Session["userID"]);
@@ -85,7 +85,7 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvCart.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Availability FROM Artist WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryArtAvailable = "SELECT Availability FROM Menu WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
                 using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
                 {
@@ -108,7 +108,7 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvCart.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Quantity FROM Artist WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryArtAvailable = "SELECT Quantity FROM Menu WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
                 using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
                 {
@@ -154,7 +154,7 @@ namespace SEM_Prototype
                 int qty = 0;
 
                 //retrieve qty left
-                string queryArtQty = "SELECT Quantity FROM Artist WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryArtQty = "SELECT Quantity FROM Menu WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
                 using (SqlCommand cmdArtQty = new SqlCommand(queryArtQty, con))
                 {
@@ -228,119 +228,6 @@ namespace SEM_Prototype
 
                 Response.Write("<script>alert('Art Information Deleted Successfully')</script>");
             }
-        }
-
-        //Order Btn
-        protected void cart_orderBtn_Click(object sender, EventArgs e)
-        {
-            //assign selected item: selected = True in order details page
-            bool haveItemChk = false;
-
-            //chkItems - if chk then update to orderdetails db
-            for (int i = 0; i < gvCart.Rows.Count; i++)
-            {
-                CheckBox chkb = (CheckBox)gvCart.Rows[i].Cells[0].FindControl("chkItems");
-
-                try
-                {
-                    if (chkb.Checked)
-                    {
-                        SqlConnection con = new SqlConnection(cs);
-                        con.Open();
-                        using (con)
-                        {
-                            String query = "Update OrderDetails SET Checked = 'True' WHERE OrderDetailId = @detailid";
-
-                            SqlCommand cmd = new SqlCommand(query, con);
-
-                            cmd.Parameters.AddWithValue("@detailid", Convert.ToInt32(gvCart.DataKeys[i].Value.ToString()));
-                            cmd.ExecuteNonQuery();
-                            gvCart.EditIndex = -1;
-                        }
-                        con.Close();
-                        haveItemChk = true;
-                    }
-                    else
-                    {
-                        SqlConnection con = new SqlConnection(cs);
-                        con.Open();
-                        using (con)
-                        {
-                            String query = "Update OrderDetails SET Checked = 'False' WHERE OrderDetailId = @detailid";
-
-                            SqlCommand cmd = new SqlCommand(query, con);
-
-                            cmd.Parameters.AddWithValue("@detailid", Convert.ToInt32(gvCart.DataKeys[i].Value.ToString()));
-                            cmd.ExecuteNonQuery();
-                            gvCart.EditIndex = -1;
-                        }
-
-                        con.Close();
-                    }
-                }
-                catch (Exception)
-                {
-                    Response.Write("<script>alert('Server down, please contact QUAD-CORE ASG. Customer Services.')</script>");
-                }
-            }
-
-            //redirect to payment page
-            try
-            {
-                if (haveItemChk)
-                {
-                    Int32 cartID;
-
-                    SqlConnection con = new SqlConnection(cs);
-                    con.Open();
-
-                    //retrieve 'pending' cartid (check if pending cart exist for cusrrent user, pending cart use to )
-                    string queryFindPendingCart = "Select CartId FROM [dbo].[Cart] WHERE UserId = '" + Session["userID"] + "'AND status = 'pending'";
-
-                    using (SqlCommand cmdCheckCart = new SqlCommand(queryFindPendingCart, con))
-                    {
-                        cartID = ((Int32?)cmdCheckCart.ExecuteScalar()) ?? 0;
-                    }
-
-                    //create a pending cart if no pending cart of the user is detected
-                    if (cartID == 0)
-                    {
-                        //create new cart for status = 'pending'
-                        string status = "pending";
-                        string sql = "INSERT into Cart (UserId, status) values('" + Session["userID"] + "', '" + status + "')";
-
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.Connection = con;
-                        cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = sql;
-
-                        cmd.ExecuteNonQuery();
-
-                        //retrieve 'pending' cartid 
-                        using (SqlCommand cmdCheckCart = new SqlCommand(queryFindPendingCart, con))
-                        {
-                            Session["pendingCart"] = ((Int32?)cmdCheckCart.ExecuteScalar()) ?? 0;
-                        }
-
-                    }
-                    else
-                    {
-                        Session["pendingCart"] = cartID;
-                    }
-                    con.Close();
-                    Response.Redirect("Payment.aspx");
-                }
-                else
-                {
-                    Response.Write("<script>alert('Please select art before proceed payment.')</script>");
-                    refreshdata();
-                }
-            }
-            catch (Exception)
-            {
-                Response.Write("<script>alert('Server down, please contact QUAD-CORE ASG. Customer Services.')</script>");
-            }
-
         }
 
         //the header checkbox

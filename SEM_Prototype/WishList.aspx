@@ -4,7 +4,7 @@
     <section>
 
         <div>
-            <img src="img/wishlist/wishlist_header.png" alt="" class="artwork-gallery-header-bg" />
+            <img src="img/wishlist/wishlist_header.png" alt="" class="menu-gallery-header-bg" />
 
             <div id="wishlist-header-text" class="wishlist-header-text">
                 WishList
@@ -23,7 +23,7 @@
                 <div class="wl-table-box">
 
                     <!-- Add to Cart Button -->
-                    <asp:Button ID="addToCartBtn" runat="server" Text="Add To Cart" CssClass="float-right art-to-cart-btn add-btn-medium" CommandArgument='<%# Eval("ArtId")%>' CommandName="addtocart" OnClick="addToCartBtn_Click" AutoPostback = false/>
+                    <asp:Button ID="addToCartBtn" runat="server" Text="Add To Cart" CssClass="float-right menu-to-cart-btn add-btn-medium" CommandArgument='<%# Eval("ArtId")%>' CommandName="addtocart" OnClick="addToCartBtn_Click" AutoPostback = false/>
                     
                     <br />
                     <br />

@@ -89,7 +89,7 @@ namespace SEM_Prototype
                 using (SqlConnection con = new SqlConnection(cs))
                 {
                     //sorting feature
-                    SqlDataAdapter da = new SqlDataAdapter("Select TOP 6 * from Artist", con);
+                    SqlDataAdapter da = new SqlDataAdapter("Select TOP 6 * from Menu", con);
 
 
                     con.Open();
@@ -125,18 +125,18 @@ namespace SEM_Prototype
             if (Session["userRole"] != null)
             {
                 //Direct to gallery
-                if (Session["userRole"].ToString().Equals("Artist"))
+                if (Session["userRole"].ToString().Equals("Management"))
                 {
                     Response.Write("<script>window.location = 'ArtistGallery.aspx';</script>");
                 }
                 else
                 {
-                    Response.Write("<script>window.location = 'ArtWorks.aspx';</script>");
+                    Response.Write("<script>window.location = 'Menu.aspx';</script>");
                 }
             }
             else
             {
-                Response.Write("<script>window.location = 'ArtWorks.aspx';</script>");
+                Response.Write("<script>window.location = 'Menu.aspx';</script>");
             }
 
         }

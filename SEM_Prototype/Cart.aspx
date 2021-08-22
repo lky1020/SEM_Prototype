@@ -99,7 +99,7 @@
             <div class="cart_page_totalPrice" >
                 <asp:Label ID="totalPrice" runat="server" Text="Total : RM 0.00"></asp:Label>
                 <br />
-                <asp:Button class="cart_orderbtn" ID="cart_orderBtn" runat="server" Text=" Order " OnClick="cart_orderBtn_Click"/>
+                <asp:Button class="cart_orderbtn" ID="cart_orderBtn" runat="server" Text=" Order "/>
             </div>
         </div>
     </div>

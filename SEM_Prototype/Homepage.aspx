@@ -4,15 +4,14 @@
     <%-- Background --%>
     <section class="banner" id="banner">
         <div class="content">
-            <h2>Always Choose The Best</h2>
+            <h2>Leader in Childcare Juice!</h2>
             <p>
-                In the road to capture all the best moments in the life.
-                The best moments in life always surround us, helping us, supporting us, and giving us strength.
+                100% blended fruit juice concentrate specifically designed for childcare centers.
             </p>
-            <a href="#artworks" class='btn'>Our ArtWorks</a>
+            <a href="#menu" class='btn'>Our Menu</a>
         </div>
 
-        <video src="img/video/sky.mp4" muted loop autoplay></video>
+        <video src="img/video/fruit.mp4" muted loop autoplay></video>
     </section>
 
     <%-- About --%>
@@ -21,33 +20,31 @@
             <div class="col50">
                 <h2 class="titleText"><span>A</span>bout Us</h2>
                 <p> &emsp;&emsp;&emsp;
-                    Quad-Core ArtWork Sales and Display Gallery
-                    is a company that provides a platform for all
-                    artists around the world to launch their artworks, 
-                    explore the beauty of artworks and collect them.
-                    Quad-Core ArtWork Sales and Display Gallery intend
-                    to collect and capture all the beauty moments in
-                    the life to promote to all the world. 
+                    We provide a variety of flavors that all kids can enjoy! 
+                    All the juice concentrates that we sell are compliant with 
+                    the USDA and FDA guidelines. You don't need to refrigerate 
+                    the concentrates before or after opening them. 
                 </p>
 
                 <br/><br/>
 
                 <p> &emsp;&emsp;&emsp;
-                    Quad-Core ArtWork Sales and Display Gallery (ASG)
-                    is founder by 4 students which is Lim Kah Yee, Joan Hau, 
-                    Cheong Yin Lam & Lee Ling. Currently, we are studying in
-                    the software engineering course (RSF) of Tunku Abdul Rahman 
-                    University College (TARUC).
+                    If you're running a childcare center and want to serve healthy 
+                    beverages to kids every day, order quality juice concentrates 
+                    from Penny Juice of America. Get delicious and nutritious 100% 
+                    fruit juice from Penny Juice of America. We provide 100% blended 
+                    fruit juice concentrates that are specially made for kids and meet 
+                    all the requirements of the FDA with regard to subsidy and nutrition. 
+                    Customers prefer our products for their benefits, features, variety, 
+                    service, and competitive pricing.
                 </p>
 
                 <br/><br/>
 
                 <p> &emsp;&emsp;&emsp;
-                    This Quad-Core ASG. website is one of our assignment in RSF2 Year 2 
-                    Sem 3. This website is used to apply all the things that we learn 
-                    about the Asp.Net website. In this website, it is about the Artworks
-                    Sales and Display gallery which is to promote Artwork and also offers 
-                    the opportunity for Art Lover to purchase them.
+                    Our system is fast and easy to use. Penny Juice greatly reduces 
+                    storage and handling requirements. 1 gallon pre-measured mix 
+                    pitchers available to assure cost control and flavor consistency.
                 </p>
             </div>
 
@@ -60,13 +57,12 @@
     </section>
 
     <%-- Artwork --%>
-    <section class="artworks" id="artworks">
+    <section class="menu" id="menu">
         <div class="title">
-            <h2 class="titleText"><span>A</span>rtWorks</h2>
+            <h2 class="titleText"><span>M</span>enu</h2>
 
             <p> 
-                The best ArtWorks that launched by Artists. Captured the 
-                best moment in our life.
+                100% blended fruit juice concentrate specifically designed for childcare centers.
             </p>
         </div>
 
@@ -76,7 +72,7 @@
                     <table id="artwork-table">
                         <tr>
                             <td>
-                                <asp:Image ID="ArtImage" runat="server" CssClass="artwork-gallery-image" ImageUrl='<%# Eval("ArtImage") %>' />
+                                <asp:Image ID="ArtImage" runat="server" CssClass="menu-gallery-image" ImageUrl='<%# Eval("ArtImage") %>' />
                             </td>
                         </tr>
                         <tr class="text-a1 padding-b15">

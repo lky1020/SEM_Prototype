@@ -30,7 +30,7 @@ namespace SEM_Prototype
             
             SqlConnection con = new SqlConnection(cs);
             con.Open();
-            String query = "Select w.WishlistId, w.UserId, w.ArtId, w.DateAdded, a.ArtName, a.ArtImage, a.Price, a.Quantity, a.ArtDescription, a.Availability from [WishList] w INNER JOIN [Artist] a on w.ArtId = a.ArtId Where w.UserId = @userid ORDER BY w.WishlistId DESC";
+            String query = "Select w.WishlistId, w.UserId, w.ArtId, w.DateAdded, a.ArtName, a.ArtImage, a.Price, a.Quantity, a.ArtDescription, a.Availability from [WishList] w INNER JOIN [Menu] a on w.ArtId = a.ArtId Where w.UserId = @userid ORDER BY w.WishlistId DESC";
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@userid", Session["userId"]);
 
@@ -71,7 +71,7 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvWishList.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Availability, Quantity FROM Artist WHERE ArtId = (SELECT ArtId FROM WishList WHERE WishlistId = @WishlistId)";
+                string queryArtAvailable = "SELECT Availability, Quantity FROM Menu WHERE ArtId = (SELECT ArtId FROM WishList WHERE WishlistId = @WishlistId)";
 
                 using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
                 {
