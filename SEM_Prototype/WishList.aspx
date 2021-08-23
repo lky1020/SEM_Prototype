@@ -11,7 +11,7 @@
             </div>
             <p class="wishlist-header-quoto">Art is a line around your thoughts.</p>
             <!-- Continue Add Art -->
-            <asp:Button ID="btnContinueWL" runat="server" Text="View Art" CssClass="btn-wlArt" OnClick="btnContinueWL_Click" />
+            <asp:Button ID="btnContinueWL" runat="server" Text="View Menu" CssClass="btn-wlArt" OnClick="btnContinueWL_Click" />
         </div>
 
 
@@ -23,7 +23,7 @@
                 <div class="wl-table-box">
 
                     <!-- Add to Cart Button -->
-                    <asp:Button ID="addToCartBtn" runat="server" Text="Add To Cart" CssClass="float-right menu-to-cart-btn add-btn-medium" CommandArgument='<%# Eval("ArtId")%>' CommandName="addtocart" OnClick="addToCartBtn_Click" AutoPostback = false/>
+                    <asp:Button ID="addToCartBtn" runat="server" Text="Add To Cart" CssClass="float-right menu-to-cart-btn add-btn-medium" CommandArgument='<%# Eval("MenuId")%>' CommandName="addtocart" OnClick="addToCartBtn_Click" AutoPostback = false/>
                     
                     <br />
                     <br />
@@ -54,7 +54,7 @@
                             <%-- GridView ArtImage --%>
                             <asp:TemplateField HeaderText="Art" ItemStyle-Width="20%" HeaderStyle-Width="20%" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
                                 <ItemTemplate>
-                                        <asp:ImageButton ID="wl_artImg" runat="server"  ImageUrl='<%# Eval("ArtImage")%>' Height="160" Width="160" OnClick="wl_artImg_Click" CommandArgument='<%# Eval("ArtId")%>' CommandName="viewdetails" CssClass="art-menu"/>
+                                        <asp:ImageButton ID="wl_artImg" runat="server"  ImageUrl='<%# Eval("MenuImage")%>' Height="160" Width="160" OnClick="wl_artImg_Click" CommandArgument='<%# Eval("MenuId")%>' CommandName="viewdetails" CssClass="art-menu"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
@@ -62,11 +62,11 @@
                             <asp:TemplateField HeaderText="Description" HeaderStyle-Width="40%" ItemStyle-Width="40%" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:Label ID="wl_artName" runat="server"> 
-                                <h3><%#Eval("ArtName")%></h3>
+                                <h3><%#Eval("MenuName")%></h3>
                                     </asp:Label>
                                     <br />
                                     <asp:Label ID="wl_artDes" runat="server"> 
-                                <%#Eval("ArtDescription")%>
+                                <%#Eval("MenuDescription")%>
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>

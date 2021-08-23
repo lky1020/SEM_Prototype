@@ -50,7 +50,7 @@
 
         <%-- Wishlist button & Close button --%>
         <div>
-            <asp:ImageButton ID="detailsLoveBtn" runat="server" AlternateText="Add to WishList" ImageUrl="img/wishlist/heart-icon-inactive.png" CssClass="cancel-btn" CommandArgument='<%# Eval("ArtId")%>' CommandName="addtowishlist" OnClick="loveBtn_Click" />
+            <asp:ImageButton ID="detailsLoveBtn" runat="server" AlternateText="Add to WishList" ImageUrl="img/wishlist/heart-icon-inactive.png" CssClass="cancel-btn" CommandArgument='<%# Eval("MenuId")%>' CommandName="addtowishlist" OnClick="loveBtn_Click" />
             <asp:ImageButton ID="detailsCancelBtn" runat="server" ImageUrl="~/img/artwork/icons8-cancel.png" OnClick="detailsCancelBtn_Click" CssClass="cancel-btn" />
         </div>
     </div>

@@ -49,27 +49,27 @@
 
         <div class="dlImg">
             <!-- Data list -->
-            <asp:DataList ID="MenuDataList" runat="server" DataKeyField="ArtId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="35" HorizontalAlign="Center" CellPadding="3" OnItemCommand="ArtWorkDataList_ItemCommand">
+            <asp:DataList ID="MenuDataList" runat="server" DataKeyField="MenuId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="35" HorizontalAlign="Center" CellPadding="3" OnItemCommand="ArtWorkDataList_ItemCommand">
                 <ItemTemplate>
                     <table id="artwork-table" style="padding-bottom: 15px;">
                         <tr>
                             <td>
-                                <a href="MenuDetails.aspx?ArtId=<%#:Eval("ArtId")%>">
-                                    <asp:Image ID="ArtImage" runat="server" CssClass="menu-gallery-image" ImageUrl='<%# Eval("ArtImage") %>' />
+                                <a href="MenuDetails.aspx?MenuId=<%#:Eval("MenuId")%>">
+                                    <asp:Image ID="MenuImage" runat="server" CssClass="menu-gallery-image" ImageUrl='<%# Eval("MenuImage") %>' />
                                 </a>
                             </td>
                         </tr>
                         <tr class="text-a1 padding-b15">
                             <td>
-                                <a href="MenuDetails.aspx?ArtId=<%#:Eval("ArtId")%>" class="menu-title">
-                                    <asp:Label ID="ArtNameLabel" runat="server" Text='<%# Eval("ArtName") %>' />
+                                <a href="MenuDetails.aspx?MenuId=<%#:Eval("MenuId")%>" class="menu-title">
+                                    <asp:Label ID="MenuNameLabel" runat="server" Text='<%# Eval("MenuName") %>' />
                                 </a>
                             </td>
                         </tr>
 
                         <tr class="text-a2">
                             <td>
-                                <asp:Label ID="ArtDescriptionLabel" runat="server" CssClass="white-text" Text='<%# Eval("ArtDescription") %>' />
+                                <asp:Label ID="MenuDescriptionLabel" runat="server" CssClass="white-text" Text='<%# Eval("MenuDescription") %>' />
                             </td>
                         </tr>
                         <tr class="text-a3">
@@ -78,8 +78,8 @@
                             </td>
                         </tr>
                     </table>
-                    <asp:Button ID="addToCartBtn" runat="server" Text="Add To Cart" CssClass="menu-to-cart-btn add-btn-medium" CommandArgument='<%# Eval("ArtId")%>' CommandName="addtocart" OnClick="addToCartBtn_Click" AutoPostback = false/>
-                    <asp:ImageButton ID="loveBtn" runat="server" AlternateText="Add to WishList" OnClick="loveBtn_Click" ImageUrl="img/wishlist/heart-icon-inactive.png" ImageAlign="right" CssClass="love-btn" CommandArgument='<%# Eval("ArtId")%>' CommandName="addtowishlist" />
+                    <asp:Button ID="addToCartBtn" runat="server" Text="Add To Cart" CssClass="menu-to-cart-btn add-btn-medium" CommandArgument='<%# Eval("MenuId")%>' CommandName="addtocart" OnClick="addToCartBtn_Click" AutoPostback = false/>
+                    <asp:ImageButton ID="loveBtn" runat="server" AlternateText="Add to WishList" OnClick="loveBtn_Click" ImageUrl="img/wishlist/heart-icon-inactive.png" ImageAlign="right" CssClass="love-btn" CommandArgument='<%# Eval("MenuId")%>' CommandName="addtowishlist" />
                     <br /><br />
                 </ItemTemplate>
             </asp:DataList>
@@ -109,7 +109,7 @@
 
     <!-- Data Source -->
     <asp:SqlDataSource ID="CategoryDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Category]"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="ArtDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Artist INNER JOIN Category ON Category.CategoryID = @Category">
+    <asp:SqlDataSource ID="MenuDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Menu INNER JOIN Category ON Category.CategoryID = @Category">
         <SelectParameters>
             <asp:ControlParameter ControlID="MenuDataList" Name="Category" PropertyName="SelectedValue" />
         </SelectParameters>

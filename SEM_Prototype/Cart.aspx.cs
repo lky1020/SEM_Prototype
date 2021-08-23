@@ -35,6 +35,7 @@ namespace SEM_Prototype
 
                     if (dt.Rows.Count >= 1)
                     {
+                        lblContactName.Text = "<b>Name: </b>" + Session["username"].ToString();
                         lblPhoneNo.Text = "<b>Phone No: </b>" + dt.Rows[0]["PhoneNo"].ToString();
                         lblAddress.Text = "<b>Address: </b>" + dt.Rows[0]["Address"].ToString();
                     }
@@ -66,9 +67,9 @@ namespace SEM_Prototype
                 //pass data into grid
                 SqlConnection con = new SqlConnection(cs);
                 con.Open();
-                String queryGetData = "Select a.ArtId, a.ArtName, a.ArtImage, a.Price, a.ArtDescription,o.orderDetailId, o.qtySelected, o.Subtotal from [Cart] c " +
+                String queryGetData = "Select m.MenuId, m.MenuName, m.MenuImage, m.Price, m.MenuDescription, o.orderDetailId, o.qtySelected, o.Subtotal from [Cart] c " +
                     "INNER JOIN [OrderDetails] o on c.CartId = o.CartId " +
-                    "INNER JOIN [Menu] a on o.ArtId = a.ArtId  " + 
+                    "INNER JOIN [Menu] m on o.MenuId = m.MenuId  " + 
                     "Where c.UserId = @userid AND c.status = 'cart'";
                 SqlCommand cmd = new SqlCommand(queryGetData, con);
                 cmd.Parameters.AddWithValue("@userid", Session["userID"]);
@@ -113,7 +114,7 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvCart.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Availability FROM Menu WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryArtAvailable = "SELECT Availability FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
                 using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
                 {
@@ -136,7 +137,7 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvCart.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Quantity FROM Menu WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryArtAvailable = "SELECT Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
                 using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
                 {
@@ -182,7 +183,7 @@ namespace SEM_Prototype
                 int qty = 0;
 
                 //retrieve qty left
-                string queryArtQty = "SELECT Quantity FROM Menu WHERE ArtId = (SELECT ArtId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryArtQty = "SELECT Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
                 using (SqlCommand cmdArtQty = new SqlCommand(queryArtQty, con))
                 {
@@ -254,7 +255,7 @@ namespace SEM_Prototype
 
                 refreshdata();
 
-                Response.Write("<script>alert('Art Information Deleted Successfully')</script>");
+                Response.Write("<script>alert('Selected Juice Remove From Table Successfully')</script>");
             }
         }
 
@@ -358,9 +359,9 @@ namespace SEM_Prototype
         protected void cart_artImg_click(object sender, ImageClickEventArgs e)
         {
             ImageButton imgButton = sender as ImageButton;
-            Int32 artID = Convert.ToInt32(imgButton.CommandArgument.ToString());
+            Int32 menuID = Convert.ToInt32(imgButton.CommandArgument.ToString());
 
-            Response.Redirect("MenuDetails.aspx?ArtId=" + artID);
+            Response.Redirect("MenuDetails.aspx?Menu=" + menuID);
         }
 
 

@@ -30,7 +30,7 @@ namespace SEM_Prototype
             
             SqlConnection con = new SqlConnection(cs);
             con.Open();
-            String query = "Select w.WishlistId, w.UserId, w.ArtId, w.DateAdded, a.ArtName, a.ArtImage, a.Price, a.Quantity, a.ArtDescription, a.Availability from [WishList] w INNER JOIN [Menu] a on w.ArtId = a.ArtId Where w.UserId = @userid ORDER BY w.WishlistId DESC";
+            String query = "Select w.WishlistId, w.UserId, m.MenuId, w.DateAdded, m.MenuName, m.MenuImage, m.Price, m.Quantity, m.MenuDescription, m.Availability from [WishList] w INNER JOIN [Menu] m on w.MenuId = m.MenuId Where w.UserId = @userid ORDER BY w.WishlistId DESC";
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@userid", Session["userId"]);
 
@@ -71,7 +71,7 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvWishList.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Availability, Quantity FROM Menu WHERE ArtId = (SELECT ArtId FROM WishList WHERE WishlistId = @WishlistId)";
+                string queryArtAvailable = "SELECT Availability, Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM WishList WHERE WishlistId = @WishlistId)";
 
                 using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
                 {
@@ -128,7 +128,7 @@ namespace SEM_Prototype
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('Sorry, Fail to Delete the Art from your wishlist')</script>");
+                Response.Write("<script>alert('Sorry, Fail to Delete the Juice from your wishlist')</script>");
             }
         }
 
@@ -204,15 +204,15 @@ namespace SEM_Prototype
 
         protected void btnContinueWL_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ArtWorks.aspx");
+            Response.Redirect("Menu.aspx");
         }
 
         protected void wl_artImg_Click(object sender, ImageClickEventArgs e)
         {
             ImageButton imgButton = sender as ImageButton;
-            Int32 artID = Convert.ToInt32(imgButton.CommandArgument.ToString());
+            Int32 menuID = Convert.ToInt32(imgButton.CommandArgument.ToString());
 
-            Response.Redirect("MenuDetails.aspx?ArtId="+ artID);
+            Response.Redirect("MenuDetails.aspx?MenuId=" + menuID);
  
         }
 
@@ -233,7 +233,7 @@ namespace SEM_Prototype
             }
         }
 
-        protected void insertCart(Int32 artID, decimal unitPrice)
+        protected void insertCart(Int32 menuID, decimal unitPrice)
         {
             Int32 cartID = 0;
             Int32 orderDetailID = 0;
@@ -286,9 +286,9 @@ namespace SEM_Prototype
 
             conn.Open();
 
-            SqlCommand cmdOrderDetailID = new SqlCommand("SELECT OrderDetailId, qtySelected, Subtotal from [OrderDetails] Where CartId = @CartId AND ArtId = @ArtId", conn);
+            SqlCommand cmdOrderDetailID = new SqlCommand("SELECT OrderDetailId, qtySelected, Subtotal from [OrderDetails] Where CartId = @CartId AND MenuId = @MenuId", conn);
             cmdOrderDetailID.Parameters.AddWithValue("@CartId", cartID);
-            cmdOrderDetailID.Parameters.AddWithValue("@ArtId", artID);
+            cmdOrderDetailID.Parameters.AddWithValue("@MenuId", menuID);
 
             SqlDataReader dtrOrderDetail = cmdOrderDetailID.ExecuteReader();
             if (dtrOrderDetail.HasRows)
@@ -327,7 +327,7 @@ namespace SEM_Prototype
             {
                 //insert order details based on cartid
 
-                string sqlInsertOrder = "INSERT into OrderDetails (CartId, ArtId, qtySelected, Subtotal) values('" + cartID + "', '" + artID + "', '" + 1 + "', '" + unitPrice + "')";
+                string sqlInsertOrder = "INSERT into OrderDetails (CartId, MenuId, qtySelected, Subtotal) values('" + cartID + "', '" + menuID + "', '" + 1 + "', '" + unitPrice + "')";
 
                 SqlCommand cmdInsertOrder = new SqlCommand();
 
@@ -378,15 +378,15 @@ namespace SEM_Prototype
                         Int32 wishlistID = Convert.ToInt32(lblWishlist.Text);
 
                         //get artID
-                        ImageButton artImg = (ImageButton)gvWishList.Rows[i].Cells[0].FindControl("wl_artImg");
-                        Int32 artID = Convert.ToInt32(artImg.CommandArgument.ToString());
+                        ImageButton menuImg = (ImageButton)gvWishList.Rows[i].Cells[0].FindControl("wl_artImg");
+                        Int32 menuID = Convert.ToInt32(menuImg.CommandArgument.ToString());
 
                         //get unit price
                         Label lblPrice = (Label)gvWishList.Rows[i].Cells[0].FindControl("wl_price");
                         decimal unitPrice = Convert.ToDecimal(lblPrice.Text);
                         try
                         {
-                            insertCart(artID, unitPrice);
+                            insertCart(menuID, unitPrice);
                             removeItem(wishlistID);
                         }
                         catch (Exception ex)
@@ -407,7 +407,7 @@ namespace SEM_Prototype
             if (haveItemChk)
             {
                 //print successfully message
-                Response.Write("<script>alert('Congratulation, Art in Wishlist Deleted Successfully')</script>");
+                Response.Write("<script>alert('Congratulation, Juice in Wishlist Deleted Successfully')</script>");
                 refreshdata();
             }
             else

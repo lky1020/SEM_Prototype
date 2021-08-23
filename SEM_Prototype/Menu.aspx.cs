@@ -42,14 +42,14 @@ namespace SEM_Prototype.ArtWorks
             {
                 var currentKey = MenuDataList.DataKeys[item.ItemIndex];
 
-                Int32 artId = Convert.ToInt32(currentKey);
+                Int32 menuId = Convert.ToInt32(currentKey);
                 int stock = 0;
 
                 connection();
                 conn.Open();
 
                 //Check stock
-                string query = "SELECT Quantity FROM [dbo].[Menu] WHERE ArtId =" + artId;
+                string query = "SELECT Quantity FROM [dbo].[Menu] WHERE MenuId =" + menuId;
 
                 using (SqlCommand cmdUser = new SqlCommand(query, conn))
                 {
@@ -78,13 +78,13 @@ namespace SEM_Prototype.ArtWorks
             {
                 var currentKey = MenuDataList.DataKeys[item.ItemIndex];
 
-                Int32 artId = Convert.ToInt32(currentKey);
+                Int32 menuId = Convert.ToInt32(currentKey);
 
                 connection();
                 conn.Open();
 
                 //Check wishlist
-                string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND ArtId ='" + artId + "'";
+                string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND MenuId ='" + menuId + "'";
                 // System.Diagnostics.Debug.WriteLine("[DEBUG][ArtName] --> " + artId);
                 using (SqlCommand cmdUser = new SqlCommand(query, conn))
                 {
@@ -120,28 +120,28 @@ namespace SEM_Prototype.ArtWorks
             connection();
 
             //sorting feature
-            dataAdapter = new SqlDataAdapter("Select * from Menu WHERE Availability = '1' ORDER BY ArtId DESC", conn);
+            dataAdapter = new SqlDataAdapter("Select * from Menu WHERE Availability = '1' ORDER BY MenuId DESC", conn);
             if (rblCategory.SelectedIndex != -1)
             {
                 switch (ddlArtSort.SelectedIndex)
                 {
                     //Display all
                     case 0:
-                        command = new SqlCommand("Select * from Menu " + "WHERE Category = @Category AND Availability = '1' ORDER BY ArtId DESC", conn);
+                        command = new SqlCommand("Select * from Menu " + "WHERE Category = @Category AND Availability = '1' ORDER BY MenuId DESC", conn);
                         command.Parameters.AddWithValue("@Category", rblCategory.SelectedIndex + 1);
                         dataAdapter.SelectCommand = command;
                         break;
 
                     //Sort by name asscending
                     case 1:
-                        command = new SqlCommand("Select * from Menu " + "WHERE Category = @Category AND Availability = '1' ORDER BY ArtName ASC", conn);
+                        command = new SqlCommand("Select * from Menu " + "WHERE Category = @Category AND Availability = '1' ORDER BY MenuName ASC", conn);
                         command.Parameters.AddWithValue("@Category", rblCategory.SelectedIndex + 1);
                         dataAdapter.SelectCommand = command;
                         break;
 
                     //Sort by name descending
                     case 2:
-                        command = new SqlCommand("Select * from Menu " + "WHERE Category = @Category AND Availability = '1' ORDER BY ArtName DESC", conn);
+                        command = new SqlCommand("Select * from Menu " + "WHERE Category = @Category AND Availability = '1' ORDER BY MenuName DESC", conn);
                         command.Parameters.AddWithValue("@Category", rblCategory.SelectedIndex + 1);
                         dataAdapter.SelectCommand = command;
                         break;
@@ -170,17 +170,17 @@ namespace SEM_Prototype.ArtWorks
                 {
                     //Display all
                     case 0:
-                        dataAdapter = new SqlDataAdapter("Select * from Menu where Availability = '1' ORDER BY ArtId DESC", conn);
+                        dataAdapter = new SqlDataAdapter("Select * from Menu where Availability = '1' ORDER BY MenuId DESC", conn);
                         break;
 
                     //Sort by name asscending
                     case 1:
-                        dataAdapter = new SqlDataAdapter("Select * from Menu where Availability = '1' ORDER BY ArtName ASC", conn);
+                        dataAdapter = new SqlDataAdapter("Select * from Menu where Availability = '1' ORDER BY MenuName ASC", conn);
                         break;
 
                     //Sort by name descending
                     case 2:
-                        dataAdapter = new SqlDataAdapter("Select * from Menu where Availability = '1' ORDER BY ArtName DESC", conn);
+                        dataAdapter = new SqlDataAdapter("Select * from Menu where Availability = '1' ORDER BY MenuName DESC", conn);
                         break;
 
                     //Sort by price asscending
@@ -305,7 +305,7 @@ namespace SEM_Prototype.ArtWorks
         {
             ImageButton imgButton = sender as ImageButton;
             Int32 wishlistID;
-            Int32 artID = Convert.ToInt32(imgButton.CommandArgument.ToString());
+            Int32 menuID = Convert.ToInt32(imgButton.CommandArgument.ToString());
 
             try
             {
@@ -319,7 +319,7 @@ namespace SEM_Prototype.ArtWorks
                             con.Open();
 
                             //check existing menu in wishlist
-                            string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND ArtId ='" + artID + "'";
+                            string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND MenuId ='" + menuID + "'";
                             using (SqlCommand cmdUser = new SqlCommand(query, con))
                             {
                                 wishlistID = ((Int32?)cmdUser.ExecuteScalar()) ?? 0;
@@ -327,7 +327,7 @@ namespace SEM_Prototype.ArtWorks
 
                             if (wishlistID == 0)
                             {
-                                string sql = "INSERT into Wishlist (ArtId, UserId, DateAdded) values('" + artID + "', '" + Session["userId"] + "', '" + DateTime.Now.ToString("MM/dd/yyyy") + "')";
+                                string sql = "INSERT into Wishlist (MenuId, UserId, DateAdded) values('" + menuID + "', '" + Session["userId"] + "', '" + DateTime.Now.ToString("MM/dd/yyyy") + "')";
 
                                 SqlCommand cmd = new SqlCommand();
 
@@ -385,7 +385,7 @@ namespace SEM_Prototype.ArtWorks
         {
             Button btn = sender as Button;
 
-            Int32 artID = Convert.ToInt32(btn.CommandArgument.ToString());
+            Int32 menuID = Convert.ToInt32(btn.CommandArgument.ToString());
             Int32 cartID = 0;
             Int32 orderDetailID = 0;
 
@@ -451,9 +451,9 @@ namespace SEM_Prototype.ArtWorks
 
                     conn.Open();
 
-                    SqlCommand cmdOrderDetailID = new SqlCommand("SELECT OrderDetailId, qtySelected, Subtotal from [OrderDetails] Where CartId = @CartId AND ArtId = @ArtId", conn);
+                    SqlCommand cmdOrderDetailID = new SqlCommand("SELECT OrderDetailId, qtySelected, Subtotal from [OrderDetails] Where CartId = @CartId AND ArtId = @MenuId", conn);
                     cmdOrderDetailID.Parameters.AddWithValue("@CartId", cartID);
-                    cmdOrderDetailID.Parameters.AddWithValue("@ArtId", artID);
+                    cmdOrderDetailID.Parameters.AddWithValue("@MenuId", menuID);
 
                     SqlDataReader dtrOrderDetail = cmdOrderDetailID.ExecuteReader();
                     if (dtrOrderDetail.HasRows)
@@ -492,7 +492,7 @@ namespace SEM_Prototype.ArtWorks
                     {
                         //insert order details based on cartid
 
-                        string sqlInsertOrder = "INSERT into OrderDetails (CartId, ArtId, qtySelected, Subtotal) values('" + cartID + "', '" + artID + "', '" + 1 + "', '" + Decimal.Parse(unitPrice.Text) + "')";
+                        string sqlInsertOrder = "INSERT into OrderDetails (CartId, ArtId, qtySelected, Subtotal) values('" + cartID + "', '" + menuID + "', '" + 1 + "', '" + Decimal.Parse(unitPrice.Text) + "')";
 
                         SqlCommand cmdInsertOrder = new SqlCommand();
 

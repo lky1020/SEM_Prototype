@@ -10,6 +10,7 @@
             <br /> 
 
             <div style="text-align: left;">
+                <asp:Label ID="lblContactName" runat="server">Name: </asp:Label> <br />
                 <asp:Label ID="lblPhoneNo" runat="server">Phone No: </asp:Label> <br />
                 <asp:Label ID="lblAddress" runat="server">Address: </asp:Label>
             </div>
@@ -35,9 +36,9 @@
                     </asp:TemplateField>
 
                     <%-- GridView ArtImage --%>
-                    <asp:TemplateField ItemStyle-Width="14%" HeaderText="Art" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
+                    <asp:TemplateField ItemStyle-Width="14%" HeaderText="Selected Juice" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>  
-                            <asp:ImageButton ID="cart_artImg" runat="server"  ImageUrl='<%# Eval("ArtImage")%>' Height="100" Width="150" OnClick="cart_artImg_click" CommandArgument='<%# Eval("ArtId")%>' CommandName="viewdetails" CssClass="margin_5"/>
+                            <asp:ImageButton ID="cart_artImg" runat="server"  ImageUrl='<%# Eval("MenuImage")%>' Height="100" Width="150" OnClick="cart_artImg_click" CommandArgument='<%# Eval("MenuId")%>' CommandName="viewdetails" CssClass="margin_5"/>
                         </ItemTemplate>
                     </asp:TemplateField> 
 
@@ -45,11 +46,11 @@
                     <asp:TemplateField ItemStyle-Width="20%" HeaderText="Description" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="cart_artName" runat="server"> 
-                                <p style="font-size:18px; margin-bottom:10px;"><%#Eval("ArtName")%></p>
+                                <p style="font-size:18px; margin-bottom:10px;"><%#Eval("MenuName")%></p>
                             </asp:Label>
 
                             <asp:Label ID="cart_artDes" runat="server"> 
-                                <p style="font-size:15px; color:lightgrey "><%#Eval("ArtDescription")%></p>
+                                <p style="font-size:15px; color:lightgrey "><%#Eval("MenuDescription")%></p>
                             </asp:Label> 
                         </ItemTemplate>
                     </asp:TemplateField>

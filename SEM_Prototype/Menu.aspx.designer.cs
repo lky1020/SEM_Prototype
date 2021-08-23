@@ -105,12 +105,12 @@ namespace SEM_Prototype.ArtWorks
         protected global::System.Web.UI.WebControls.SqlDataSource CategoryDataSource;
 
         /// <summary>
-        /// ArtDataSource control.
+        /// MenuDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ArtDataSource;
+        protected global::System.Web.UI.WebControls.SqlDataSource MenuDataSource;
     }
 }

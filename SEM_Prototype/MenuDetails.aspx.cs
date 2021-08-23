@@ -33,8 +33,8 @@ namespace SEM_Prototype.ArtWorks
                 con.Open();
 
                 // retrieve data
-                SqlCommand cmd = new SqlCommand("SELECT a.ArtName, a.Availability, a.ArtImage, a.Price, a.ArtDescription, a.Quantity, u.Name, u.Bio, u.ProfileImg from[Menu] a INNER JOIN[User] u on a.UserId = u.UserId Where a.ArtId = @ArtId", con);
-                cmd.Parameters.AddWithValue("@ArtId", Request.QueryString["ArtId"]);
+                SqlCommand cmd = new SqlCommand("SELECT m.MenuName, m.Availability, m.MenuImage, m.Price, m.MenuDescription, m.Quantity, u.Name, u.Bio, u.ProfileImg from [Menu] m INNER JOIN [User] u on m.UserId = u.UserId Where MenuId = @MenuId", con);
+                cmd.Parameters.AddWithValue("@MenuId", Request.QueryString["MenuId"]);
 
                 SqlDataReader dtrArt = cmd.ExecuteReader();
 
@@ -43,13 +43,13 @@ namespace SEM_Prototype.ArtWorks
                     while (dtrArt.Read())
                     {
 
-                        dArtDetailsImage.ImageUrl = dtrArt["ArtImage"].ToString();
+                        dArtDetailsImage.ImageUrl = dtrArt["MenuImage"].ToString();
 
-                        dArtName.Text = dtrArt["ArtName"].ToString().ToUpper();
+                        dArtName.Text = dtrArt["MenuName"].ToString().ToUpper();
 
                         dArtPrice.Text = "RM " + String.Format("{0:0.00}", dtrArt["Price"]);
 
-                        dAboutArt.Text = dtrArt["ArtDescription"].ToString();
+                        dAboutArt.Text = dtrArt["MenuDescription"].ToString();
 
                         if(Convert.ToInt32(dtrArt["Availability"]) == 0){
                             dArtStock.Text = "-";
@@ -81,7 +81,7 @@ namespace SEM_Prototype.ArtWorks
                     con.Open();
 
                     //Check wishlist
-                    string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND ArtId ='" + Request.QueryString["ArtId"] + "'";
+                    string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND MenuId ='" + Request.QueryString["MenuId"] + "'";
                     using (SqlCommand cmdUser = new SqlCommand(query, con))
                     {
                         wishlistID = ((Int32?)cmdUser.ExecuteScalar()) ?? 0;
@@ -143,7 +143,7 @@ namespace SEM_Prototype.ArtWorks
                         con.Open();
 
                         //check existing art in wishlist
-                        string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND ArtId ='" + Request.QueryString["ArtId"] + "'";
+                        string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND MenuId ='" + Request.QueryString["MenuId"] + "'";
                         using (SqlCommand cmdUser = new SqlCommand(query, con))
                         {
                             wishlistID = ((Int32?)cmdUser.ExecuteScalar()) ?? 0;
@@ -152,7 +152,7 @@ namespace SEM_Prototype.ArtWorks
                         if (wishlistID == 0)
                         {
                             //Insert Art into Wishlist
-                            string sql = "INSERT into Wishlist (ArtId, UserId, DateAdded) values('" + Request.QueryString["ArtId"] + "', '" + Session["userId"] + "', '" + DateTime.Now.ToString("MM/dd/yyyy") + "')";
+                            string sql = "INSERT into Wishlist (MenuId, UserId, DateAdded) values('" + Request.QueryString["MenuId"] + "', '" + Session["userId"] + "', '" + DateTime.Now.ToString("MM/dd/yyyy") + "')";
 
                             SqlCommand cmd = new SqlCommand();
 
@@ -167,7 +167,7 @@ namespace SEM_Prototype.ArtWorks
                             imgButton.ImageUrl = "/img/wishlist/heart-icon-active.png";
 
                             //Response.Write("<script>alert('Congratulation, Art Added into Wishlist Successfully')</script>");
-                            System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Art Added into Wishlist Successfully");
+                            System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Juice Added into Wishlist Successfully");
                         }
                         else
                         {
@@ -183,7 +183,7 @@ namespace SEM_Prototype.ArtWorks
                             //unactive the icon
                             imgButton.ImageUrl = "/img/wishlist/heart-icon-inactive.png";
 
-                            System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Art in Wishlist Deleted Successfully");
+                            System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Juice in Wishlist Deleted Successfully");
 
                         }
 
@@ -287,9 +287,9 @@ namespace SEM_Prototype.ArtWorks
 
                                     con.Open();
 
-                                    SqlCommand cmdOrderDetailID = new SqlCommand("SELECT OrderDetailId, qtySelected, Subtotal from [OrderDetails] Where CartId = @CartId AND ArtId = @ArtId", con);
+                                    SqlCommand cmdOrderDetailID = new SqlCommand("SELECT OrderDetailId, qtySelected, Subtotal from [OrderDetails] Where CartId = @CartId AND MenuId = @MenuId", con);
                                     cmdOrderDetailID.Parameters.AddWithValue("@CartId", cartID);
-                                    cmdOrderDetailID.Parameters.AddWithValue("@ArtId", Request.QueryString["ArtId"]);
+                                    cmdOrderDetailID.Parameters.AddWithValue("@MenuId", Request.QueryString["MenuId"]);
 
                                     SqlDataReader dtrOrderDetail = cmdOrderDetailID.ExecuteReader();
                                     if (dtrOrderDetail.HasRows)
@@ -328,7 +328,7 @@ namespace SEM_Prototype.ArtWorks
                                     {
                                         //insert order details based on cartid
 
-                                        string sqlInsertOrder = "INSERT into OrderDetails (CartId, ArtId, qtySelected, Subtotal) values('" + cartID + "', '" + Request.QueryString["ArtId"] + "', '" + qtySelected + "', '" + subtotal + "')";
+                                        string sqlInsertOrder = "INSERT into OrderDetails (CartId, MenuId, qtySelected, Subtotal) values('" + cartID + "', '" + Request.QueryString["MenuId"] + "', '" + qtySelected + "', '" + subtotal + "')";
 
                                         SqlCommand cmdInsertOrder = new SqlCommand();
 
