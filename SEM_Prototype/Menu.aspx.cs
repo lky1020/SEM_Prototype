@@ -451,7 +451,7 @@ namespace SEM_Prototype.ArtWorks
 
                     conn.Open();
 
-                    SqlCommand cmdOrderDetailID = new SqlCommand("SELECT OrderDetailId, qtySelected, Subtotal from [OrderDetails] Where CartId = @CartId AND ArtId = @MenuId", conn);
+                    SqlCommand cmdOrderDetailID = new SqlCommand("SELECT OrderDetailId, qtySelected, Subtotal from [OrderDetails] Where CartId = @CartId AND MenuId = @MenuId", conn);
                     cmdOrderDetailID.Parameters.AddWithValue("@CartId", cartID);
                     cmdOrderDetailID.Parameters.AddWithValue("@MenuId", menuID);
 
@@ -477,7 +477,7 @@ namespace SEM_Prototype.ArtWorks
                         qtyOrderDetail++;
                         subtotalOrderDetail += Decimal.Parse(unitPrice.Text);
 
-                        string sqlUpdatetOrder = "UPDATE  OrderDetails SET qtySelected = " + qtyOrderDetail + ", Subtotal = " + subtotalOrderDetail + " WHERE OrderDetailId = " + orderDetailID ;
+                        string sqlUpdatetOrder = "UPDATE OrderDetails SET qtySelected = " + qtyOrderDetail + ", Subtotal = " + subtotalOrderDetail + " WHERE OrderDetailId = " + orderDetailID ;
 
                         SqlCommand cmdInsertOrder = new SqlCommand();
 
@@ -492,7 +492,7 @@ namespace SEM_Prototype.ArtWorks
                     {
                         //insert order details based on cartid
 
-                        string sqlInsertOrder = "INSERT into OrderDetails (CartId, ArtId, qtySelected, Subtotal) values('" + cartID + "', '" + menuID + "', '" + 1 + "', '" + Decimal.Parse(unitPrice.Text) + "')";
+                        string sqlInsertOrder = "INSERT into OrderDetails (CartId, MenuId, qtySelected, Subtotal) values('" + cartID + "', '" + menuID + "', '" + 1 + "', '" + Decimal.Parse(unitPrice.Text) + "')";
 
                         SqlCommand cmdInsertOrder = new SqlCommand();
 
