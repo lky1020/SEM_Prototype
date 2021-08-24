@@ -78,6 +78,11 @@
       <DependentUpon>PennyJuiceDB.mdf</DependentUpon>
     </Content>
     <Content Include="css\menudetails.css" />
+    <Content Include="img\menu\art_about.jpg" />
+    <Content Include="img\menu\header_bg.jpg" />
+    <Content Include="img\menu\icons8-artist.png" />
+    <Content Include="img\menu\icons8-cancel.png" />
+    <Content Include="img\menu\icons8-paint-brush.png" />
     <Content Include="MenuDetails.aspx" />
     <Content Include="Menu.aspx" />
     <Content Include="Cart.aspx" />

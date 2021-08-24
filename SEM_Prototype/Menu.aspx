@@ -3,7 +3,7 @@
 <asp:Content ID="Menu" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header Banner -->
     <div class="container">
-        <img src="img/artwork/header_bg.jpg" alt="" class="menu-gallery-header-bg" />
+        <img src="img/menu/header_bg.jpg" alt="" class="menu-gallery-header-bg" />
 
         <div id="menu-gallery-header-text" class="menu-gallery-header-text">
             Menu

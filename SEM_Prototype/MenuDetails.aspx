@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/WAD.Master" AutoEventWireup="true" CodeBehind="MenuDetails.aspx.cs" Inherits="SEM_Prototype.ArtWorks.MenuDetails" %>
 
 <asp:Content ID="MenuDetails" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <img src="img/artwork/art_about.jpg" class="art-details-bg" />
+    <img src="img/menu/art_about.jpg" class="art-details-bg" />
 
     <div class="details-container">
         <div class="details-left">
@@ -51,7 +51,7 @@
         <%-- Wishlist button & Close button --%>
         <div>
             <asp:ImageButton ID="detailsLoveBtn" runat="server" AlternateText="Add to WishList" ImageUrl="img/wishlist/heart-icon-inactive.png" CssClass="cancel-btn" CommandArgument='<%# Eval("MenuId")%>' CommandName="addtowishlist" OnClick="loveBtn_Click" />
-            <asp:ImageButton ID="detailsCancelBtn" runat="server" ImageUrl="~/img/artwork/icons8-cancel.png" OnClick="detailsCancelBtn_Click" CssClass="cancel-btn" />
+            <asp:ImageButton ID="detailsCancelBtn" runat="server" ImageUrl="~/img/menu/icons8-cancel.png" OnClick="detailsCancelBtn_Click" CssClass="cancel-btn" />
         </div>
     </div>
 
@@ -60,7 +60,7 @@
         <table class="details-about">
             <tr>
                 <td>
-                    <img src="img/artwork/icons8-paint-brush.png" /></td>
+                    <img src="img/menu/icons8-paint-brush.png" /></td>
                 <td style="color: white;"><span>A</span>bout the art</td>
             </tr>
         </table>
@@ -76,7 +76,7 @@
             <table class="details-about">
                 <tr>
                     <td>
-                        <img src="img/artwork/icons8-artist.png" />
+                        <img src="img/menu/icons8-artist.png" />
                     </td>
                     <td style="color: white;"><span>A</span>rtist</td>
                 </tr>
