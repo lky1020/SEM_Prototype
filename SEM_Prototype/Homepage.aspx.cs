@@ -15,7 +15,7 @@ namespace SEM_Prototype
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // For the artwork
+            // For the menu
             bindList();
         }
 

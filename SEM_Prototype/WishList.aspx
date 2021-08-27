@@ -54,18 +54,18 @@
                             <%-- GridView ArtImage --%>
                             <asp:TemplateField HeaderText="Art" ItemStyle-Width="20%" HeaderStyle-Width="20%" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
                                 <ItemTemplate>
-                                        <asp:ImageButton ID="wl_artImg" runat="server"  ImageUrl='<%# Eval("MenuImage")%>' Height="160" Width="160" OnClick="wl_artImg_Click" CommandArgument='<%# Eval("MenuId")%>' CommandName="viewdetails" CssClass="art-menu"/>
+                                        <asp:ImageButton ID="wl_menuImg" runat="server"  ImageUrl='<%# Eval("MenuImage")%>' Height="160" Width="160" OnClick="wl_menuImg_Click" CommandArgument='<%# Eval("MenuId")%>' CommandName="viewdetails" CssClass="menu-menu"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
                             <%-- GridView ArtName & Desc --%>
                             <asp:TemplateField HeaderText="Description" HeaderStyle-Width="40%" ItemStyle-Width="40%" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="wl_artName" runat="server"> 
+                                    <asp:Label ID="wl_menuName" runat="server"> 
                                 <h3><%#Eval("MenuName")%></h3>
                                     </asp:Label>
                                     <br />
-                                    <asp:Label ID="wl_artDes" runat="server"> 
+                                    <asp:Label ID="wl_menuDes" runat="server"> 
                                 <%#Eval("MenuDescription")%>
                                     </asp:Label>
                                 </ItemTemplate>

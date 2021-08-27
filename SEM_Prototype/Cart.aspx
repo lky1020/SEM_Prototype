@@ -45,11 +45,11 @@
                     <%-- GridView ArtName & Desc --%>
                     <asp:TemplateField ItemStyle-Width="20%" HeaderText="Description" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <asp:Label ID="cart_artName" runat="server"> 
+                            <asp:Label ID="cart_menuName" runat="server"> 
                                 <p style="font-size:18px; margin-bottom:10px;"><%#Eval("MenuName")%></p>
                             </asp:Label>
 
-                            <asp:Label ID="cart_artDes" runat="server"> 
+                            <asp:Label ID="cart_menuDes" runat="server"> 
                                 <p style="font-size:15px; color:lightgrey "><%#Eval("MenuDescription")%></p>
                             </asp:Label> 
                         </ItemTemplate>
@@ -59,7 +59,7 @@
                     <asp:TemplateField ItemStyle-Width="11%" HeaderText="Price" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center"> 
                         <ItemTemplate >
                             <asp:Label runat="server"> RM <%# Eval("Price") %></asp:Label>
-                            <asp:TextBox ID="cart_artPrice"  Text='<%# Eval("Price") %>' runat="server" Visible="false"></asp:TextBox>
+                            <asp:TextBox ID="cart_menuPrice"  Text='<%# Eval("Price") %>' runat="server" Visible="false"></asp:TextBox>
                         </ItemTemplate>
                     </asp:TemplateField>
 
@@ -82,7 +82,7 @@
                     <asp:TemplateField ItemStyle-Width="11%" HeaderText="Subtotal" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                              <asp:Label runat="server"> RM <%# Eval("SubTotal") %></asp:Label>
-                            <asp:TextBox ID="cart_artSubPrice"  Text='<%# Eval("SubTotal") %>' runat="server" Visible="false"></asp:TextBox>
+                            <asp:TextBox ID="cart_menuSubPrice"  Text='<%# Eval("SubTotal") %>' runat="server" Visible="false"></asp:TextBox>
                           </ItemTemplate>
                     </asp:TemplateField>
 

@@ -92,7 +92,7 @@ namespace SEM_Prototype
                                 CheckBox chkbox = gvWishList.Rows[i].FindControl("chkItems") as CheckBox;
                                 chkbox.Enabled = false;
 
-                                Label lblDescription = gvWishList.Rows[i].FindControl("wl_artDes") as Label;
+                                Label lblDescription = gvWishList.Rows[i].FindControl("wl_menuDes") as Label;
                                 lblDescription.Text = "Item is not available";
 
                             }
@@ -207,7 +207,7 @@ namespace SEM_Prototype
             Response.Redirect("Menu.aspx");
         }
 
-        protected void wl_artImg_Click(object sender, ImageClickEventArgs e)
+        protected void wl_menuImg_Click(object sender, ImageClickEventArgs e)
         {
             ImageButton imgButton = sender as ImageButton;
             Int32 menuID = Convert.ToInt32(imgButton.CommandArgument.ToString());
@@ -377,8 +377,8 @@ namespace SEM_Prototype
                         Label lblWishlist = (Label)gvWishList.Rows[i].Cells[0].FindControl("lblWishlistID");
                         Int32 wishlistID = Convert.ToInt32(lblWishlist.Text);
 
-                        //get artID
-                        ImageButton menuImg = (ImageButton)gvWishList.Rows[i].Cells[0].FindControl("wl_artImg");
+                        //get menuID
+                        ImageButton menuImg = (ImageButton)gvWishList.Rows[i].Cells[0].FindControl("wl_menuImg");
                         Int32 menuID = Convert.ToInt32(menuImg.CommandArgument.ToString());
 
                         //get unit price

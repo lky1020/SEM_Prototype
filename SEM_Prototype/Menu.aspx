@@ -33,9 +33,7 @@
     <div class="menu-gallery">
         <!-- Sorting & Search -->
         <div class="menu-search-sort">
-            <!--   <div class="art-search">Search</div> -->
-
-            <div class="art-sort">
+            <div class="menu-sort">
                 <asp:DropDownList ID="ddlArtSort" runat="server" CssClass="ddlArtSort" AutoPostBack="True" OnSelectedIndexChanged="ddlArtSort_SelectedIndexChanged">
                     <asp:ListItem>Sort by</asp:ListItem>
                     <asp:ListItem>Name A - Z</asp:ListItem>
@@ -51,7 +49,7 @@
             <!-- Data list -->
             <asp:DataList ID="MenuDataList" runat="server" DataKeyField="MenuId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="35" HorizontalAlign="Center" CellPadding="3" OnItemCommand="ArtWorkDataList_ItemCommand">
                 <ItemTemplate>
-                    <table id="artwork-table" style="padding-bottom: 15px;">
+                    <table id="menu-table" style="padding-bottom: 15px;">
                         <tr>
                             <td>
                                 <a href="MenuDetails.aspx?MenuId=<%#:Eval("MenuId")%>">

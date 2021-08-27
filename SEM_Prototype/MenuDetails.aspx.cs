@@ -49,8 +49,6 @@ namespace SEM_Prototype.ArtWorks
 
                         dArtPrice.Text = "RM " + String.Format("{0:0.00}", dtrArt["Price"]);
 
-                        dAboutArt.Text = dtrArt["MenuDescription"].ToString();
-
                         if(Convert.ToInt32(dtrArt["Availability"]) == 0){
                             dArtStock.Text = "-";
                         }
@@ -58,23 +56,6 @@ namespace SEM_Prototype.ArtWorks
                         {
                             dArtStock.Text = dtrArt["Quantity"].ToString();
                         }
-                        
-
-                        string profileImage = dtrArt["ProfileImg"].ToString();
-                        if (!String.IsNullOrEmpty(profileImage))
-                            dArtistImage.ImageUrl = profileImage;
-                        else
-                            dArtistImage.ImageUrl = "/img/userPic/user_default.png";
-
-                        dArtistName.Text = dtrArt["Name"].ToString();
-
-                        string bio = dtrArt["Bio"].ToString();
-                        if (!String.IsNullOrEmpty(bio))
-                            dBio.Text = bio;
-                        else
-                            dBio.Text = "The artist didn't leave any bio...";
-
-
                     }
 
                     con.Close();
@@ -142,7 +123,7 @@ namespace SEM_Prototype.ArtWorks
                         SqlConnection con = new SqlConnection(constr);
                         con.Open();
 
-                        //check existing art in wishlist
+                        //check existing menu in wishlist
                         string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND MenuId ='" + Request.QueryString["MenuId"] + "'";
                         using (SqlCommand cmdUser = new SqlCommand(query, con))
                         {
@@ -171,7 +152,7 @@ namespace SEM_Prototype.ArtWorks
                         }
                         else
                         {
-                            //Delete the art in wishlist
+                            //Delete the menu in wishlist
 
                             query = "DELETE FROM [dbo].[Wishlist] WHERE WishlistId = @wishlistID";
 
@@ -345,6 +326,7 @@ namespace SEM_Prototype.ArtWorks
 
 
                                     Response.Write("<script>alert('Congratulation, Art Added into Cart Successfully')</script>");
+                                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "Go back to Menu", "window.location = 'Menu.aspx';", true);
                                 }
 
                             }

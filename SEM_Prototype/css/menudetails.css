@@ -1,5 +1,5 @@
 ﻿/* Art Work Details */
-.art-details-bg {
+.menu-details-bg {
     position: absolute;
     top: 0;
     left: 0;
@@ -38,7 +38,7 @@
 }
 
 /* Name, price */
-.details-artname {
+.details-menuname {
     font-size: 45px;
     letter-spacing: 2px;
 }

@@ -69,7 +69,7 @@
         <div class="content">
             <asp:DataList ID="MenuDataList" runat="server" DataKeyField="MenuId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="60" HorizontalAlign="Center" CellPadding="3">
                 <ItemTemplate>
-                    <table id="artwork-table">
+                    <table id="menu-table">
                         <tr>
                             <td>
                                 <asp:Image ID="MenuImage" runat="server" CssClass="menu-gallery-image" ImageUrl='<%# Eval("MenuImage") %>' />

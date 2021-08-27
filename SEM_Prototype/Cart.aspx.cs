@@ -283,7 +283,7 @@ namespace SEM_Prototype
                 {
                     if (chkb.Checked)
                     {
-                        totalSelectPrice += double.Parse((gvCart.Rows[i].FindControl("cart_artSubPrice") as TextBox).Text.ToString());
+                        totalSelectPrice += double.Parse((gvCart.Rows[i].FindControl("cart_menuSubPrice") as TextBox).Text.ToString());
                         totalPrice.Text = "Total : RM " + totalSelectPrice.ToString("F");
                     }
                 }else{
@@ -308,7 +308,7 @@ namespace SEM_Prototype
 
                 if (chkb.Checked && gvCart.Rows[i].Cells[0].Enabled == true)
                 {
-                    totalSelectPrice += double.Parse((gvCart.Rows[i].FindControl("cart_artSubPrice") as TextBox).Text.ToString());
+                    totalSelectPrice += double.Parse((gvCart.Rows[i].FindControl("cart_menuSubPrice") as TextBox).Text.ToString());
                     
                 }
                 else if (chckheader.Checked == true && chkb.Checked == false && gvCart.Rows[i].Cells[0].Enabled == true)
@@ -361,7 +361,7 @@ namespace SEM_Prototype
             ImageButton imgButton = sender as ImageButton;
             Int32 menuID = Convert.ToInt32(imgButton.CommandArgument.ToString());
 
-            Response.Redirect("MenuDetails.aspx?Menu=" + menuID);
+            Response.Redirect("MenuDetails.aspx?MenuId=" + menuID);
         }
 
 

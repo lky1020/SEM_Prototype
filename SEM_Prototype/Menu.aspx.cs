@@ -85,7 +85,6 @@ namespace SEM_Prototype.ArtWorks
 
                 //Check wishlist
                 string query = "SELECT WishlistId FROM [dbo].[Wishlist] WHERE UserId = '" + Session["userId"] + "' AND MenuId ='" + menuId + "'";
-                // System.Diagnostics.Debug.WriteLine("[DEBUG][ArtName] --> " + artId);
                 using (SqlCommand cmdUser = new SqlCommand(query, conn))
                 {
                     wishlistID = ((Int32?)cmdUser.ExecuteScalar()) ?? 0;
