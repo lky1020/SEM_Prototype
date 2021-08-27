@@ -10,8 +10,8 @@
                 WishList
             </div>
             <p class="wishlist-header-quoto">100% blended fruit juice concentrate specifically designed for childcare centers</p>
-            <!-- Continue Add Art -->
-            <asp:Button ID="btnContinueWL" runat="server" Text="View Menu" CssClass="btn-wlArt" OnClick="btnContinueWL_Click" />
+            <!-- Continue Add Menu -->
+            <asp:Button ID="btnContinueWL" runat="server" Text="View Menu" CssClass="btn-wlMenu" OnClick="btnContinueWL_Click" />
         </div>
 
 
@@ -51,14 +51,14 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-                            <%-- GridView ArtImage --%>
-                            <asp:TemplateField HeaderText="Art" ItemStyle-Width="20%" HeaderStyle-Width="20%" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
+                            <%-- GridView MenuImage --%>
+                            <asp:TemplateField HeaderText="Menu" ItemStyle-Width="20%" HeaderStyle-Width="20%" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
                                 <ItemTemplate>
                                         <asp:ImageButton ID="wl_menuImg" runat="server"  ImageUrl='<%# Eval("MenuImage")%>' Height="160" Width="160" OnClick="wl_menuImg_Click" CommandArgument='<%# Eval("MenuId")%>' CommandName="viewdetails" CssClass="menu-menu"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-                            <%-- GridView ArtName & Desc --%>
+                            <%-- GridView MenuName & Desc --%>
                             <asp:TemplateField HeaderText="Description" HeaderStyle-Width="40%" ItemStyle-Width="40%" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:Label ID="wl_menuName" runat="server"> 
@@ -71,7 +71,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-                            <%-- GridView Art Price --%>
+                            <%-- GridView Menu Price --%>
                             <asp:TemplateField HeaderText="Price" HeaderStyle-Width="15%" ItemStyle-Width="15%" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     RM <asp:Label ID="wl_price" Text='<%# Eval("Price", "{0:0.00}") %>' runat="server"></asp:Label>

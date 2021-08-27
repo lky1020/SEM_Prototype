@@ -56,7 +56,7 @@
         </div>
     </section>
 
-    <%-- Artwork --%>
+    <%-- Menuwork --%>
     <section class="menu" id="menu">
         <div class="title">
             <h2 class="titleText"><span>M</span>enu</h2>

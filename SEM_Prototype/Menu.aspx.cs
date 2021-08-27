@@ -6,9 +6,9 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Drawing;
 
-namespace SEM_Prototype.ArtWorks
+namespace SEM_Prototype.MenuWorks
 {
-    public partial class ArtWorks : System.Web.UI.Page
+    public partial class MenuWorks : System.Web.UI.Page
     {
         int CurrentPage;
         SqlConnection conn;
@@ -122,7 +122,7 @@ namespace SEM_Prototype.ArtWorks
             dataAdapter = new SqlDataAdapter("Select * from Menu WHERE Availability = '1' ORDER BY MenuId DESC", conn);
             if (rblCategory.SelectedIndex != -1)
             {
-                switch (ddlArtSort.SelectedIndex)
+                switch (ddlMenuSort.SelectedIndex)
                 {
                     //Display all
                     case 0:
@@ -165,7 +165,7 @@ namespace SEM_Prototype.ArtWorks
             }
             else
             {
-                switch (ddlArtSort.SelectedIndex)
+                switch (ddlMenuSort.SelectedIndex)
                 {
                     //Display all
                     case 0:
@@ -271,7 +271,7 @@ namespace SEM_Prototype.ArtWorks
             setLoveIcon();
         }
 
-        protected void ddlArtSort_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlMenuSort_SelectedIndexChanged(object sender, EventArgs e)
         {
             bindList();
             checkAvailability();
@@ -337,8 +337,8 @@ namespace SEM_Prototype.ArtWorks
 
                                 cmd.ExecuteNonQuery();
                                 imgButton.ImageUrl = "/img/wishlist/heart-icon-active.png";
-                                //Response.Write("<script>alert('Congratulation, Art Added into Wishlist Successfully')</script>");
-                                System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Art Added into Wishlist Successfully");
+                                //Response.Write("<script>alert('Congratulation, Menu Added into Wishlist Successfully')</script>");
+                                System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Menu Added into Wishlist Successfully");
                             }
                             else
                             {
@@ -354,7 +354,7 @@ namespace SEM_Prototype.ArtWorks
                                 //unactive the icon
                                 imgButton.ImageUrl = "/img/wishlist/heart-icon-inactive.png";
 
-                                System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Art in Wishlist Deleted Successfully");
+                                System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Menu in Wishlist Deleted Successfully");
                             }
                             con.Close();
 
@@ -507,7 +507,7 @@ namespace SEM_Prototype.ArtWorks
                     conn.Close();
 
 
-                    Response.Write("<script>alert('Congratulation, Art Added into Cart Successfully')</script>");
+                    Response.Write("<script>alert('Congratulation, Menu Added into Cart Successfully')</script>");
                 }
 
             }
@@ -520,7 +520,7 @@ namespace SEM_Prototype.ArtWorks
             }
         }
 
-        protected void ArtWorkDataList_ItemCommand(object source, DataListCommandEventArgs e)
+        protected void MenuWorkDataList_ItemCommand(object source, DataListCommandEventArgs e)
         {
 
             if (e.CommandName == "addtocart")

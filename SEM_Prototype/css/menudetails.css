@@ -1,4 +1,4 @@
-﻿/* Art Work Details */
+﻿/* Menu Work Details */
 .menu-details-bg {
     position: absolute;
     top: 0;
@@ -60,7 +60,7 @@
     margin-top: 10%;
 }
 
-/* Art Description */
+/* Menu Description */
 .details-box {
     width: 100%;
     padding-top: 25px;
@@ -96,10 +96,10 @@
     margin-left: 15px;
 }
 
-.details-artabout {
+/*.details-artabout {
     letter-spacing: 1px;
     line-height: 35px;
-}
+}*/
 
 .details-desc-box {
     text-align: center;
@@ -108,22 +108,22 @@
     margin-top: 3%;
 }
 
-/* Artist */
+/* Menuist */
 
-/* Artist Image */
-.details-artist-img {
+/* Menuist Image */
+/*.details-artist-img {
     border-radius: 50%;
     width: 200px;
     height: 200px;
     object-fit: cover;
-}
+}*/
 
-/* Artist Name */
-.details-artist-name {
+/* Menuist Name */
+/*.details-artist-name {
     font-size: 30px;
     letter-spacing: 2px;
     color: #F2AA4CFF;
-}
+}*/
 
 /* Bio */
 .details-bio {

@@ -43,11 +43,11 @@ namespace SEM_Prototype
             //Display manage menu btn when role == Management
             if (Session["userRole"].ToString().Equals("Management")){
 
-                ScriptManager.RegisterStartupScript(Page, this.GetType(), "DisplayManageArtBtn", "displayManageArt();", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "DisplayManageMenuBtn", "displayManageMenu();", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, this.GetType(), "UndisplayManageArtBtn", "undisplayManageArt();", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "UndisplayManageMenuBtn", "undisplayManageMenu();", true);
             }
 
             //Update the Profile Pic for phone no, address password
@@ -375,7 +375,7 @@ namespace SEM_Prototype
                     "undisplayCancelEditButton();", true);
 
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "Direct to manage menu",
-                    "window.location = 'Art.aspx';", true);
+                    "window.location = 'Menu.aspx';", true);
         }
 
         private Boolean CheckUserCurrentPhoneNo()

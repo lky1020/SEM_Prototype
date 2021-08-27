@@ -1,25 +1,25 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/WAD.Master" AutoEventWireup="true" CodeBehind="MenuDetails.aspx.cs" Inherits="SEM_Prototype.ArtWorks.MenuDetails" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/WAD.Master" AutoEventWireup="true" CodeBehind="MenuDetails.aspx.cs" Inherits="SEM_Prototype.MenuWorks.MenuDetails" %>
 
 <asp:Content ID="MenuDetails" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <img src="img/menu/art_about.jpg" class="menu-details-bg" />
 
     <div class="details-container">
         <div class="details-left">
-            <asp:Image ID="dArtDetailsImage" runat="server" CssClass="details-image" />
+            <asp:Image ID="dMenuDetailsImage" runat="server" CssClass="details-image" />
         </div>
 
         <div class="details-right">
             <%-- Name --%>
-            <asp:Label ID="dArtName" runat="server" CssClass="details-menuname"></asp:Label>
+            <asp:Label ID="dMenuName" runat="server" CssClass="details-menuname"></asp:Label>
             <p class="details-price-str">PRICE</p>
 
             <%-- Price --%>
-            <asp:Label ID="dArtPrice" runat="server" CssClass="details-price"></asp:Label>
+            <asp:Label ID="dMenuPrice" runat="server" CssClass="details-price"></asp:Label>
 
             <%-- Stock --%>
             <div class="details-stock-str">
                 Current stock :
-                <asp:Label ID="dArtStock" runat="server"></asp:Label>
+                <asp:Label ID="dMenuStock" runat="server"></asp:Label>
             </div>
 
 

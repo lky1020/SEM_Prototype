@@ -25,8 +25,8 @@
     font-weight: 500;
 }
 
-/* Add Art Button */
-.btn-wlArt {
+/* Add Menu Button */
+.btn-wlMenu {
     background-color: rgb(13,34,46);
     width: 150px;
     height: 40px;
@@ -39,7 +39,7 @@
     font-size: 17px;
 }
 
-.btn-wlArt:hover {
+.btn-wlMenu:hover {
     background-color: rebeccapurple;
     color: white;
     transition: 0.5s;

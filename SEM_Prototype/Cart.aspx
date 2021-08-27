@@ -35,14 +35,14 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <%-- GridView ArtImage --%>
+                    <%-- GridView MenuImage --%>
                     <asp:TemplateField ItemStyle-Width="14%" HeaderText="Selected Juice" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>  
-                            <asp:ImageButton ID="cart_artImg" runat="server"  ImageUrl='<%# Eval("MenuImage")%>' Height="100" Width="150" OnClick="cart_artImg_click" CommandArgument='<%# Eval("MenuId")%>' CommandName="viewdetails" CssClass="margin_5"/>
+                            <asp:ImageButton ID="cart_menuImg" runat="server"  ImageUrl='<%# Eval("MenuImage")%>' Height="100" Width="150" OnClick="cart_menuImg_click" CommandArgument='<%# Eval("MenuId")%>' CommandName="viewdetails" CssClass="margin_5"/>
                         </ItemTemplate>
                     </asp:TemplateField> 
 
-                    <%-- GridView ArtName & Desc --%>
+                    <%-- GridView menu Name & Desc --%>
                     <asp:TemplateField ItemStyle-Width="20%" HeaderText="Description" HeaderStyle-Height="50px" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="cart_menuName" runat="server"> 
@@ -55,7 +55,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <%-- GridView Art Price --%>
+                    <%-- GridView Menu Price --%>
                     <asp:TemplateField ItemStyle-Width="11%" HeaderText="Price" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center"> 
                         <ItemTemplate >
                             <asp:Label runat="server"> RM <%# Eval("Price") %></asp:Label>
@@ -63,7 +63,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <%-- GridView Art Qty Selected --%>
+                    <%-- GridView Menu Qty Selected --%>
                     <asp:TemplateField ItemStyle-Width="8%" HeaderText="Qty" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate >
                             <asp:Label runat="server"  type="number"> 
@@ -78,7 +78,7 @@
 
                     </asp:TemplateField>
            
-                    <%-- GridView Art Subtotal --%>
+                    <%-- GridView Menu Subtotal --%>
                     <asp:TemplateField ItemStyle-Width="11%" HeaderText="Subtotal" HeaderStyle-Font-Size="Large" HeaderStyle-BackColor="#484848" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                              <asp:Label runat="server"> RM <%# Eval("SubTotal") %></asp:Label>
@@ -86,7 +86,7 @@
                           </ItemTemplate>
                     </asp:TemplateField>
 
-                    <%-- Edit Qty / Delete Art --%>
+                    <%-- Edit Qty / Delete Menu --%>
                     <asp:TemplateField HeaderText="" ItemStyle-Width="7%" ItemStyle-HorizontalAlign="Center" HeaderStyle-BackColor="#484848">
                         <ItemTemplate>
                             <asp:ImageButton ID="editBtn" ImageUrl="~/img/icon/edit.png" runat="server" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px" style="text-align: center"/>
@@ -103,7 +103,7 @@
                 </Columns>
             </asp:GridView>
 
-            <%-- GridView Art TotalPrice --%>
+            <%-- GridView Menu TotalPrice --%>
             <div class="cart_page_totalPrice" >
                 <asp:Label ID="totalPrice" runat="server" Text="Total : RM 0.00"></asp:Label>
                 <br />

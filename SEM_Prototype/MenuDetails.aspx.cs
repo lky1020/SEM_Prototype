@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Drawing;
 
-namespace SEM_Prototype.ArtWorks
+namespace SEM_Prototype.MenuWorks
 {
     public partial class MenuDetails : System.Web.UI.Page
     {
@@ -19,12 +19,12 @@ namespace SEM_Prototype.ArtWorks
             if (!this.IsPostBack)
             {
                 ImageButton loveBtn = FindControl("detailsLoveBtn") as ImageButton;
-                this.GetArtDetails();
+                this.GetMenuDetails();
             }
         }
 
 
-        private void GetArtDetails()
+        private void GetMenuDetails()
         {
             try
             {
@@ -36,25 +36,25 @@ namespace SEM_Prototype.ArtWorks
                 SqlCommand cmd = new SqlCommand("SELECT m.MenuName, m.Availability, m.MenuImage, m.Price, m.MenuDescription, m.Quantity, u.Name, u.Bio, u.ProfileImg from [Menu] m INNER JOIN [User] u on m.UserId = u.UserId Where MenuId = @MenuId", con);
                 cmd.Parameters.AddWithValue("@MenuId", Request.QueryString["MenuId"]);
 
-                SqlDataReader dtrArt = cmd.ExecuteReader();
+                SqlDataReader dtrMenu = cmd.ExecuteReader();
 
-                if (dtrArt.HasRows)
+                if (dtrMenu.HasRows)
                 {
-                    while (dtrArt.Read())
+                    while (dtrMenu.Read())
                     {
 
-                        dArtDetailsImage.ImageUrl = dtrArt["MenuImage"].ToString();
+                        dMenuDetailsImage.ImageUrl = dtrMenu["MenuImage"].ToString();
 
-                        dArtName.Text = dtrArt["MenuName"].ToString().ToUpper();
+                        dMenuName.Text = dtrMenu["MenuName"].ToString().ToUpper();
 
-                        dArtPrice.Text = "RM " + String.Format("{0:0.00}", dtrArt["Price"]);
+                        dMenuPrice.Text = "RM " + String.Format("{0:0.00}", dtrMenu["Price"]);
 
-                        if(Convert.ToInt32(dtrArt["Availability"]) == 0){
-                            dArtStock.Text = "-";
+                        if(Convert.ToInt32(dtrMenu["Availability"]) == 0){
+                            dMenuStock.Text = "-";
                         }
                         else
                         {
-                            dArtStock.Text = dtrArt["Quantity"].ToString();
+                            dMenuStock.Text = dtrMenu["Quantity"].ToString();
                         }
                     }
 
@@ -82,13 +82,13 @@ namespace SEM_Prototype.ArtWorks
                     con.Close();
 
                     //Check stock
-                    if (dArtStock.Text.Equals("-"))
+                    if (dMenuStock.Text.Equals("-"))
                     {
                         //disable button
                         addToCartBtn.Enabled = false;
                         addToCartBtn.Text = "Not Available";
                         addToCartBtn.BackColor = Color.DarkGray;
-                    }else if (dArtStock.Text.Equals("0"))
+                    }else if (dMenuStock.Text.Equals("0"))
                     {
                         addToCartBtn.Enabled = false;
                         addToCartBtn.Text = "SOLD OUT";
@@ -132,7 +132,7 @@ namespace SEM_Prototype.ArtWorks
 
                         if (wishlistID == 0)
                         {
-                            //Insert Art into Wishlist
+                            //Insert Menu into Wishlist
                             string sql = "INSERT into Wishlist (MenuId, UserId, DateAdded) values('" + Request.QueryString["MenuId"] + "', '" + Session["userId"] + "', '" + DateTime.Now.ToString("MM/dd/yyyy") + "')";
 
                             SqlCommand cmd = new SqlCommand();
@@ -147,7 +147,7 @@ namespace SEM_Prototype.ArtWorks
                             //active the icon
                             imgButton.ImageUrl = "/img/wishlist/heart-icon-active.png";
 
-                            //Response.Write("<script>alert('Congratulation, Art Added into Wishlist Successfully')</script>");
+                            //Response.Write("<script>alert('Congratulation, Menu Added into Wishlist Successfully')</script>");
                             System.Diagnostics.Debug.WriteLine("[MSG][WISHLIST] --> Congratulation, Juice Added into Wishlist Successfully");
                         }
                         else
@@ -201,7 +201,7 @@ namespace SEM_Prototype.ArtWorks
             try
             {
                 qtySelected = Convert.ToInt32(detailsQtyControl.Text);
-                subtotal = qtySelected * Convert.ToDecimal(dArtPrice.Text.Substring(3));
+                subtotal = qtySelected * Convert.ToDecimal(dMenuPrice.Text.Substring(3));
 
                 try
                 {
@@ -219,7 +219,7 @@ namespace SEM_Prototype.ArtWorks
                                 {
                                     Response.Write("<script>alert('The quantity cannot be 0, please enter your quantity.')</script>");
                                 }
-                                else if (qtySelected > Convert.ToInt32(dArtStock.Text))
+                                else if (qtySelected > Convert.ToInt32(dMenuStock.Text))
                                 {
                                     Response.Write("<script>alert('Sorry, not enough stock, please enter your quantity.')</script>");
                                 }
@@ -240,7 +240,7 @@ namespace SEM_Prototype.ArtWorks
                                         String status = "cart";
                                         string sql = "INSERT into Cart (UserId, status) values('" + Session["username"] + "', '" + status + "')";
 
-                                        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ArtWorkDb"].ConnectionString);
+                                        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["MenuWorkDb"].ConnectionString);
                                         SqlCommand cmd = new SqlCommand();
                                         conn.Open();
                                         cmd.Connection = conn;
@@ -287,7 +287,7 @@ namespace SEM_Prototype.ArtWorks
 
                                     con.Open();
 
-                                    //check whether exist same art (order detail)
+                                    //check whether exist same menu (order detail)
                                     if (orderDetailID != 0)
                                     {
                                         //update order details
@@ -325,7 +325,7 @@ namespace SEM_Prototype.ArtWorks
                                     con.Close();
 
 
-                                    Response.Write("<script>alert('Congratulation, Art Added into Cart Successfully')</script>");
+                                    Response.Write("<script>alert('Congratulation, Menu Added into Cart Successfully')</script>");
                                     ScriptManager.RegisterStartupScript(Page, this.GetType(), "Go back to Menu", "window.location = 'Menu.aspx';", true);
                                 }
 

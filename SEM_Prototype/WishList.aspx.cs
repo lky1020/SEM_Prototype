@@ -71,21 +71,21 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvWishList.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Availability, Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM WishList WHERE WishlistId = @WishlistId)";
+                string queryMenuAvailable = "SELECT Availability, Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM WishList WHERE WishlistId = @WishlistId)";
 
-                using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
+                using (SqlCommand cmdMenuAvailable = new SqlCommand(queryMenuAvailable, con))
                 {
-                    cmdArtAvailable.Parameters.AddWithValue("@WishlistId", gvWishList.DataKeys[i].Value.ToString());
+                    cmdMenuAvailable.Parameters.AddWithValue("@WishlistId", gvWishList.DataKeys[i].Value.ToString());
                     con.Open();
 
-                    SqlDataReader dtrArt = cmdArtAvailable.ExecuteReader();
+                    SqlDataReader dtrMenu = cmdMenuAvailable.ExecuteReader();
 
-                    if (dtrArt.HasRows)
+                    if (dtrMenu.HasRows)
                     {
-                        while (dtrArt.Read())
+                        while (dtrMenu.Read())
                         {
-                            available = (Boolean)dtrArt["Availability"];
-                            stock = (int)dtrArt["Quantity"];
+                            available = (Boolean)dtrMenu["Availability"];
+                            stock = (int)dtrMenu["Quantity"];
 
                             if (stock == 0 || !available)
                             {

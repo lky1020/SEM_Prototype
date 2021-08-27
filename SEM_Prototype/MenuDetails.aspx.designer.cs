@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SEM_Prototype.ArtWorks
+namespace SEM_Prototype.MenuWorks
 {
 
 
@@ -15,40 +15,40 @@ namespace SEM_Prototype.ArtWorks
     {
 
         /// <summary>
-        /// dArtDetailsImage control.
+        /// dMenuDetailsImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image dArtDetailsImage;
+        protected global::System.Web.UI.WebControls.Image dMenuDetailsImage;
 
         /// <summary>
-        /// dArtName control.
+        /// dMenuName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label dArtName;
+        protected global::System.Web.UI.WebControls.Label dMenuName;
 
         /// <summary>
-        /// dArtPrice control.
+        /// dMenuPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label dArtPrice;
+        protected global::System.Web.UI.WebControls.Label dMenuPrice;
 
         /// <summary>
-        /// dArtStock control.
+        /// dMenuStock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label dArtStock;
+        protected global::System.Web.UI.WebControls.Label dMenuStock;
 
         /// <summary>
         /// dPlusControl control.

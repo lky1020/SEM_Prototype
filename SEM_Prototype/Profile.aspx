@@ -237,12 +237,12 @@
         }
 
         //display manage menu btn when role == management
-        function displayManageArt() {
+        function displayManageMenu() {
             document.getElementById('<%= btnManageMenu.ClientID %>').style.display = "inline-block";
         }
 
         //undisplay manage menu btn when role != management
-        function undisplayManageArt() {
+        function undisplayManageMenu() {
             document.getElementById('<%= btnManageMenu.ClientID %>').style.display = "none";
         }
 

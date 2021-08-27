@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/WAD.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="SEM_Prototype.ArtWorks.ArtWorks" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/WAD.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="SEM_Prototype.MenuWorks.MenuWorks" %>
 
 <asp:Content ID="Menu" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header Banner -->
@@ -34,7 +34,7 @@
         <!-- Sorting & Search -->
         <div class="menu-search-sort">
             <div class="menu-sort">
-                <asp:DropDownList ID="ddlArtSort" runat="server" CssClass="ddlArtSort" AutoPostBack="True" OnSelectedIndexChanged="ddlArtSort_SelectedIndexChanged">
+                <asp:DropDownList ID="ddlMenuSort" runat="server" CssClass="ddlMenuSort" AutoPostBack="True" OnSelectedIndexChanged="ddlMenuSort_SelectedIndexChanged">
                     <asp:ListItem>Sort by</asp:ListItem>
                     <asp:ListItem>Name A - Z</asp:ListItem>
                     <asp:ListItem>Name Z - A</asp:ListItem>
@@ -47,7 +47,7 @@
 
         <div class="dlImg">
             <!-- Data list -->
-            <asp:DataList ID="MenuDataList" runat="server" DataKeyField="MenuId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="35" HorizontalAlign="Center" CellPadding="3" OnItemCommand="ArtWorkDataList_ItemCommand">
+            <asp:DataList ID="MenuDataList" runat="server" DataKeyField="MenuId" RepeatColumns="3" RepeatDirection="Horizontal" CellSpacing="35" HorizontalAlign="Center" CellPadding="3" OnItemCommand="MenuWorkDataList_ItemCommand">
                 <ItemTemplate>
                     <table id="menu-table" style="padding-bottom: 15px;">
                         <tr>

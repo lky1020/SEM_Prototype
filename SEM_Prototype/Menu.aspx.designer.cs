@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SEM_Prototype.ArtWorks
+namespace SEM_Prototype.MenuWorks
 {
 
 
-    public partial class ArtWorks
+    public partial class MenuWorks
     {
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace SEM_Prototype.ArtWorks
         protected global::System.Web.UI.WebControls.Button btnReset;
 
         /// <summary>
-        /// ddlArtSort control.
+        /// ddlMenuSort control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlArtSort;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMenuSort;
 
         /// <summary>
         /// MenuDataList control.

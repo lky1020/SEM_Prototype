@@ -97,7 +97,7 @@ namespace SEM_Prototype
                     totalPrice.Visible = false;
                     cart_orderBtn.Visible = false;
                 }
-                checkArtAvailability();
+                checkMenuAvailability();
             }catch(Exception)
             {
                 ScriptManager.RegisterStartupScript(Page, this.GetType(), "CartDenied",
@@ -106,7 +106,7 @@ namespace SEM_Prototype
         }
 
         //detect menu product availability
-        private void checkArtAvailability()
+        private void checkMenuAvailability()
         {
             SqlConnection con = new SqlConnection(cs);
             con.Open();
@@ -114,12 +114,12 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvCart.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Availability FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryMenuAvailable = "SELECT Availability FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
-                using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
+                using (SqlCommand cmdMenuAvailable = new SqlCommand(queryMenuAvailable, con))
                 {
-                    cmdArtAvailable.Parameters.AddWithValue("@od_Id", gvCart.DataKeys[i].Value.ToString());
-                    availability = (Boolean)((cmdArtAvailable.ExecuteScalar()) ?? '0');
+                    cmdMenuAvailable.Parameters.AddWithValue("@od_Id", gvCart.DataKeys[i].Value.ToString());
+                    availability = (Boolean)((cmdMenuAvailable.ExecuteScalar()) ?? '0');
 
                     if (!availability)
                     {
@@ -137,12 +137,12 @@ namespace SEM_Prototype
 
             for (int i = 0; i < gvCart.Rows.Count; i++)
             {
-                string queryArtAvailable = "SELECT Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryMenuAvailable = "SELECT Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
-                using (SqlCommand cmdArtAvailable = new SqlCommand(queryArtAvailable, con))
+                using (SqlCommand cmdMenuAvailable = new SqlCommand(queryMenuAvailable, con))
                 {
-                    cmdArtAvailable.Parameters.AddWithValue("@od_Id", gvCart.DataKeys[i].Value.ToString());
-                    qtyAvailable = (int)((cmdArtAvailable.ExecuteScalar()) ?? 0);
+                    cmdMenuAvailable.Parameters.AddWithValue("@od_Id", gvCart.DataKeys[i].Value.ToString());
+                    qtyAvailable = (int)((cmdMenuAvailable.ExecuteScalar()) ?? 0);
 
                     if (qtyAvailable == 0)
                     {
@@ -183,12 +183,12 @@ namespace SEM_Prototype
                 int qty = 0;
 
                 //retrieve qty left
-                string queryArtQty = "SELECT Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
+                string queryMenuQty = "SELECT Quantity FROM Menu WHERE MenuId = (SELECT MenuId FROM OrderDetails WHERE OrderDetailId = @od_Id); ";
 
-                using (SqlCommand cmdArtQty = new SqlCommand(queryArtQty, con))
+                using (SqlCommand cmdMenuQty = new SqlCommand(queryMenuQty, con))
                 {
-                    cmdArtQty.Parameters.AddWithValue("@od_Id", gvCart.DataKeys[e.RowIndex].Value.ToString());
-                    qty = ((Int32?)cmdArtQty.ExecuteScalar()) ?? 0;
+                    cmdMenuQty.Parameters.AddWithValue("@od_Id", gvCart.DataKeys[e.RowIndex].Value.ToString());
+                    qty = ((Int32?)cmdMenuQty.ExecuteScalar()) ?? 0;
 
                 }
                 con.Close();
@@ -217,7 +217,7 @@ namespace SEM_Prototype
                         SqlCommand cmd = new SqlCommand(query, con);
 
                         int itemQty = int.Parse((gvCart.Rows[e.RowIndex].FindControl("cart_qtySelect") as TextBox).Text.Trim());
-                        double price = double.Parse((gvCart.Rows[e.RowIndex].FindControl("cart_artPrice") as TextBox).Text.Trim());
+                        double price = double.Parse((gvCart.Rows[e.RowIndex].FindControl("cart_menuPrice") as TextBox).Text.Trim());
 
                         double subTotal = price * itemQty;
 
@@ -356,7 +356,7 @@ namespace SEM_Prototype
 
         }
 
-        protected void cart_artImg_click(object sender, ImageClickEventArgs e)
+        protected void cart_menuImg_click(object sender, ImageClickEventArgs e)
         {
             ImageButton imgButton = sender as ImageButton;
             Int32 menuID = Convert.ToInt32(imgButton.CommandArgument.ToString());
