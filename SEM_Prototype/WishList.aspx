@@ -9,7 +9,7 @@
             <div id="wishlist-header-text" class="wishlist-header-text">
                 WishList
             </div>
-            <p class="wishlist-header-quoto">Art is a line around your thoughts.</p>
+            <p class="wishlist-header-quoto">100% blended fruit juice concentrate specifically designed for childcare centers</p>
             <!-- Continue Add Art -->
             <asp:Button ID="btnContinueWL" runat="server" Text="View Menu" CssClass="btn-wlArt" OnClick="btnContinueWL_Click" />
         </div>

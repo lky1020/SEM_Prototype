@@ -122,22 +122,8 @@ namespace SEM_Prototype
 
         protected void btnViewAll_Click(object sender, EventArgs e)
         {
-            if (Session["userRole"] != null)
-            {
-                //Direct to gallery
-                if (Session["userRole"].ToString().Equals("Management"))
-                {
-                    Response.Write("<script>window.location = 'ArtistGallery.aspx';</script>");
-                }
-                else
-                {
-                    Response.Write("<script>window.location = 'Menu.aspx';</script>");
-                }
-            }
-            else
-            {
-                Response.Write("<script>window.location = 'Menu.aspx';</script>");
-            }
+
+            Response.Write("<script>window.location = 'Menu.aspx';</script>");
 
         }
 
