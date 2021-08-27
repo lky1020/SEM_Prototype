@@ -23,7 +23,7 @@ namespace SEM_Prototype
 
                 if (previousUrl != null)
                 {
-                    Response.Write("<script>alert('Unauthorized Access !'); window.location = '" + previousUrl + "';</script>");
+                    //Response.Write("<script>alert('Unauthorized Access !'); window.location = '" + previousUrl + "';</script>");
                 }
 
             }
