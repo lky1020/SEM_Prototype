@@ -399,7 +399,7 @@ namespace SEM_Prototype
                 }
                 catch (Exception ex)
                 {
-                    Response.Write("<script>alert('Server down, please contact QUAD-CORE ASG. Customer Services.')</script>");
+                    Response.Write("<script>alert('Server down, please contact PennyJuice. Customer Services.')</script>");
                     System.Diagnostics.Debug.WriteLine("[DEBUG][EXCEPTION] --> " + ex.Message);
                 }
             }

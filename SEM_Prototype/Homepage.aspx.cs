@@ -71,7 +71,7 @@ namespace SEM_Prototype
                         }
                         catch (Exception)
                         {
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Email Status", "alert('Sorry, Quad-Core ASG Email Account Down. Please Contact Quad-Core AWS!')", true);
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Email Status", "alert('Sorry, PennyJuice Email Account Down. Please Contact PennyJuice!')", true);
                         }
                     }
                 }
@@ -104,7 +104,7 @@ namespace SEM_Prototype
             }
             catch(Exception)
             {
-                ScriptManager.RegisterStartupScript(Page, this.GetType(), "HomepageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "HomepageDBError", "alert('Error Occur in Database. Please Contact PennyJuice!');", true);
             }
 
         }

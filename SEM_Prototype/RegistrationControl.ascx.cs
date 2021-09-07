@@ -130,7 +130,7 @@ namespace SEM_Prototype
             }
             catch (Exception)
             {
-                ScriptManager.RegisterStartupScript(Page, this.GetType(), "RegistrationpageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                ScriptManager.RegisterStartupScript(Page, this.GetType(), "RegistrationpageDBError", "alert('Error Occur in Database. Please Contact PennyJuice!');", true);
                 ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
             }
 
@@ -159,7 +159,7 @@ namespace SEM_Prototype
                 }
                 catch (Exception)
                 {
-                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "RegistrationpageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "RegistrationpageDBError", "alert('Error Occur in Database. Please Contact PennyJuice!');", true);
                     ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
                 }
             }
@@ -191,7 +191,7 @@ namespace SEM_Prototype
                 }
                 catch (Exception)
                 {
-                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "RegistrationpageDBError", "alert('Error Occur in Database. Please Contact Quad-Core AWS!');", true);
+                    ScriptManager.RegisterStartupScript(Page, this.GetType(), "RegistrationpageDBError", "alert('Error Occur in Database. Please Contact PennyJuice!');", true);
                     ScriptManager.RegisterStartupScript(Page, this.GetType(), "DirectToHomepage", "alert('Redirecting you to Homepage!'); window.location = 'Homepage.aspx';", true);
                 }
             }
